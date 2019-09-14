@@ -9,6 +9,9 @@ export default StyleSheet.create({
     padding: 20,
     alignItems: "center"
   },
+  content: {
+    flexGrow: 1
+  },
   thumbnail: {
     width: 60,
     height: 60,
@@ -17,10 +20,18 @@ export default StyleSheet.create({
   image: {
     paddingRight: 10
   },
+  titleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
   title: {
     fontWeight: "bold"
   },
   subTitle: {
+    color: "grey",
+    opacity: 0.9
+  },
+  timeStamp: {
     color: "grey",
     opacity: 0.9
   }

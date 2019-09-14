@@ -2,6 +2,7 @@ import React, { useMemo, useEffect } from "react";
 import { View, FlatList, Text } from "react-native";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
+import moment from "moment";
 import ListItem from "../commons/ListItem";
 
 const ChatList = () => {
@@ -45,6 +46,7 @@ const ChatList = () => {
             title={item.name}
             subTitle={item.lastMessage.content}
             image={item.picture}
+            timeStamp={moment(item.lastMessage.createdAt).format("HH:mm")}
           />
         )}
         keyExtractor={item => item.id}
