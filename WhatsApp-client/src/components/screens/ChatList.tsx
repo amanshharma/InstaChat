@@ -1,16 +1,26 @@
 import React, { useMemo, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, FlatList, Text } from "react-native";
 import gql from "graphql-tag";
-import { useApolloClient, useQuery } from "@apollo/react-hooks";
-import axios from "axios";
-
-import { SafeAreaView } from "react-native-safe-area-view";
+import { useQuery } from "@apollo/react-hooks";
+import ListItem from "../commons/ListItem";
 
 const ChatList = () => {
   const getChatsQuery = gql`
     query GetChats {
       chats {
         id
+        name
+        picture
+        lastMessage {
+          id
+          content
+          createdAt
+        }
+        messages {
+          id
+          content
+          createdAt
+        }
       }
     }
   `;
@@ -28,7 +38,13 @@ const ChatList = () => {
 
   return (
     <View>
-      <Text>Awesome</Text>
+      <FlatList
+        data={data.chats}
+        renderItem={({ item }) => (
+          <ListItem title={item.name} subTitle={item.lastMessage.content} />
+        )}
+        keyExtractor={item => item.id}
+      />
     </View>
   );
 };

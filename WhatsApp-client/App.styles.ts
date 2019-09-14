@@ -4,7 +4,6 @@ import { getStatusBarHeight } from "react-native-safe-area-view";
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: "red",
     marginTop: Platform.OS === "ios" ? 0 : getStatusBarHeight()
   }
 });
