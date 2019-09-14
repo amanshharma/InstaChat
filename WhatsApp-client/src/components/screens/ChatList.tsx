@@ -41,7 +41,11 @@ const ChatList = () => {
       <FlatList
         data={data.chats}
         renderItem={({ item }) => (
-          <ListItem title={item.name} subTitle={item.lastMessage.content} />
+          <ListItem
+            title={item.name}
+            subTitle={item.lastMessage.content}
+            image={item.picture}
+          />
         )}
         keyExtractor={item => item.id}
       />
