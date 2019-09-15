@@ -4,8 +4,8 @@ import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import moment from "moment";
 import { Actions } from "react-native-router-flux";
-import ListItem from "../commons/ListItem";
-import TopNavBar from "../headers/TopNavBar";
+import ListItem from "../../commons/ListItem";
+import TopNavBar from "../../headers/TopNavBar";
 import styles from "./ChatList.styles";
 import { Ionicons, Entypo } from "@expo/vector-icons";
 

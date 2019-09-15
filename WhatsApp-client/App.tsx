@@ -7,8 +7,8 @@ import {
   SafeAreaView,
   Platform
 } from "react-native";
-import ChatList from "./src/components/screens/ChatList";
-import ChatRoom from "./src/components/screens/ChatRoom";
+import ChatList from "./src/components/screens/ChatList/ChatList";
+import ChatRoom from "./src/components/screens/ChatRoom/ChatRoom";
 import client from "./client";
 import { getStatusBarHeight } from "react-native-safe-area-view";
 import { ApolloProvider } from "@apollo/react-hooks";

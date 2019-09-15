@@ -7,7 +7,6 @@ import {
   ImageBackground
 } from "react-native";
 import gql from "graphql-tag";
-import TopNavBar from "../headers/TopNavBar";
 import { useQuery } from "@apollo/react-hooks";
 import { SafeAreaView } from "react-native-safe-area-view";
 import {
@@ -18,6 +17,8 @@ import {
   AntDesign
 } from "@expo/vector-icons";
 import { Actions } from "react-native-router-flux";
+import TopNavBar from "../../headers/TopNavBar";
+import MessageInput from "./MessageInput";
 import styles from "./ChatRoom.styles";
 
 const ChatRoom = ({ id }) => {
@@ -56,7 +57,7 @@ const ChatRoom = ({ id }) => {
 
   return (
     <ImageBackground
-      source={require("../../../assets/chat-bg.jpg")}
+      source={require("../../../../assets/chat-bg.jpg")}
       style={{ width: "100%", height: "100%" }}
     >
       <View style={styles.wrapper}>
@@ -109,6 +110,7 @@ const ChatRoom = ({ id }) => {
           )}
         />
       </View>
+      <MessageInput />
     </ImageBackground>
   );
 };
