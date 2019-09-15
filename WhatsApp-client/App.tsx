@@ -40,8 +40,14 @@ export default function App() {
               component={ChatList}
               title="WhatsApp"
               initial={true}
+              hideNavBar
             />
-            <Scene key="chatroom" component={ChatRoom} title="Register" />
+            <Scene
+              key="chatroom"
+              component={ChatRoom}
+              title="Register"
+              hideNavBar
+            />
             <Scene key="home" component={ChatList} />
           </Stack>
         </Router>

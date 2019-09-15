@@ -5,6 +5,9 @@ import { useQuery } from "@apollo/react-hooks";
 import moment from "moment";
 import { Actions } from "react-native-router-flux";
 import ListItem from "../commons/ListItem";
+import TopNavBar from "../headers/TopNavBar";
+import styles from "./ChatList.styles";
+import { Ionicons, Entypo } from "@expo/vector-icons";
 
 const ChatList = () => {
   const getChatsQuery = gql`
@@ -39,7 +42,26 @@ const ChatList = () => {
   console.log("error", error);
 
   return (
-    <View>
+    <View style={styles.wrapper}>
+      <TopNavBar
+        renderLeft={() => <Text style={styles.title}>WhatsApp</Text>}
+        renderRight={() => (
+          <View style={styles.navRightContent}>
+            <Ionicons
+              name="md-search"
+              size={24}
+              color="white"
+              style={styles.icon}
+            />
+            <Entypo
+              name="dots-three-vertical"
+              size={24}
+              color="white"
+              style={styles.icon}
+            />
+          </View>
+        )}
+      />
       <FlatList
         data={data.chats}
         renderItem={({ item }) => (
