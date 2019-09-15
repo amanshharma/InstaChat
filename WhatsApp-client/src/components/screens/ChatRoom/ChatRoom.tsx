@@ -111,7 +111,8 @@ const ChatRoom = ({ id }) => {
           )}
         />
       </View>
-      {!!data.messages && <MessageList />}
+      <Text>amandeep</Text>
+      <MessageList messages={data.chat.messages} />
       <MessageInput />
     </ImageBackground>
   );

@@ -1,11 +1,14 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 
-const MessageList = () => {
+const MessageList = ({ messages = [] }) => {
+  console.log("messages --", messages);
   return (
-    <View>
-      <Text>MessageList</Text>
-    </View>
+    <FlatList
+      data={messages}
+      keyExtractor={(item, index) => item.id}
+      renderItem={({ item: message }) => <Text>{message.content}</Text>}
+    />
   );
 };
 
