@@ -8,6 +8,7 @@ import {
   Platform
 } from "react-native";
 import ChatList from "./src/components/screens/ChatList";
+import ChatRoom from "./src/components/screens/ChatRoom";
 import client from "./client";
 import { getStatusBarHeight } from "react-native-safe-area-view";
 import { ApolloProvider } from "@apollo/react-hooks";
@@ -40,7 +41,7 @@ export default function App() {
               title="WhatsApp"
               initial={true}
             />
-            <Scene key="register" component={ChatList} title="Register" />
+            <Scene key="chatroom" component={ChatRoom} title="Register" />
             <Scene key="home" component={ChatList} />
           </Stack>
         </Router>

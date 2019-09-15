@@ -3,6 +3,7 @@ import { View, FlatList, Text } from "react-native";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import moment from "moment";
+import { Actions } from "react-native-router-flux";
 import ListItem from "../commons/ListItem";
 
 const ChatList = () => {
@@ -47,6 +48,7 @@ const ChatList = () => {
             subTitle={item.lastMessage.content}
             image={item.picture}
             timeStamp={moment(item.lastMessage.createdAt).format("HH:mm")}
+            onPress={() => Actions.chatroom({ id: item.id })}
           />
         )}
         keyExtractor={item => item.id}
