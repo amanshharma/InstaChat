@@ -19,6 +19,7 @@ import {
 import { Actions } from "react-native-router-flux";
 import TopNavBar from "../../headers/TopNavBar";
 import MessageInput from "./MessageInput";
+import MessageList from "./MessageList";
 import styles from "./ChatRoom.styles";
 
 const ChatRoom = ({ id }) => {
@@ -110,6 +111,7 @@ const ChatRoom = ({ id }) => {
           )}
         />
       </View>
+      {!!data.messages && <MessageList />}
       <MessageInput />
     </ImageBackground>
   );
