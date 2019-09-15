@@ -1,5 +1,11 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ImageBackground
+} from "react-native";
 import gql from "graphql-tag";
 import TopNavBar from "../headers/TopNavBar";
 import { useQuery } from "@apollo/react-hooks";
@@ -11,8 +17,8 @@ import {
   MaterialIcons,
   AntDesign
 } from "@expo/vector-icons";
-import styles from "./ChatRoom.styles";
 import { Actions } from "react-native-router-flux";
+import styles from "./ChatRoom.styles";
 
 const ChatRoom = ({ id }) => {
   const getMessagesQuery = gql`
@@ -49,56 +55,61 @@ const ChatRoom = ({ id }) => {
   console.log("DATA", data);
 
   return (
-    <View style={styles.wrapper}>
-      <TopNavBar
-        renderLeft={() => (
-          <View style={styles.navLeftContent}>
-            <TouchableOpacity onPress={() => Actions.pop()}>
-              <AntDesign
-                name="arrowleft"
+    <ImageBackground
+      source={require("../../../assets/chat-bg.jpg")}
+      style={{ width: "100%", height: "100%" }}
+    >
+      <View style={styles.wrapper}>
+        <TopNavBar
+          renderLeft={() => (
+            <View style={styles.navLeftContent}>
+              <TouchableOpacity onPress={() => Actions.pop()}>
+                <AntDesign
+                  name="arrowleft"
+                  size={24}
+                  style={styles.icon}
+                  color="white"
+                />
+              </TouchableOpacity>
+              <View style={styles.image}>
+                <Image
+                  source={{ uri: data.chat.picture }}
+                  style={styles.thumbnail}
+                />
+              </View>
+              <View style={styles.navTitleContainer}>
+                <TouchableOpacity>
+                  <Text style={styles.navTitle}>{data.chat.name}</Text>
+                </TouchableOpacity>
+                <Text style={styles.navLastSeen}>Last Seen</Text>
+              </View>
+            </View>
+          )}
+          renderRight={() => (
+            <View style={styles.navRightContent}>
+              <FontAwesome
+                name="video-camera"
                 size={24}
                 style={styles.icon}
                 color="white"
               />
-            </TouchableOpacity>
-            <View style={styles.image}>
-              <Image
-                source={{ uri: data.chat.picture }}
-                style={styles.thumbnail}
+              <MaterialIcons
+                name="call"
+                size={24}
+                style={styles.icon}
+                color="white"
+              />
+              <Entypo
+                name="dots-three-vertical"
+                size={24}
+                color="white"
+                style={styles.icon}
               />
             </View>
-            <View style={styles.navTitleContainer}>
-              <TouchableOpacity>
-                <Text style={styles.navTitle}>{data.chat.name}</Text>
-              </TouchableOpacity>
-              <Text style={styles.navLastSeen}>Last Seen</Text>
-            </View>
-          </View>
-        )}
-        renderRight={() => (
-          <View style={styles.navRightContent}>
-            <FontAwesome
-              name="video-camera"
-              size={24}
-              style={styles.icon}
-              color="white"
-            />
-            <MaterialIcons
-              name="call"
-              size={24}
-              style={styles.icon}
-              color="white"
-            />
-            <Entypo
-              name="dots-three-vertical"
-              size={24}
-              color="white"
-              style={styles.icon}
-            />
-          </View>
-        )}
-      />
-    </View>
+          )}
+        />
+      </View>
+    </ImageBackground>
   );
 };
 
