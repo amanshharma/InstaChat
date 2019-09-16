@@ -7,7 +7,7 @@ import {
   ImageBackground
 } from "react-native";
 import gql from "graphql-tag";
-import { useQuery, useApolloClient } from "@apollo/react-hooks";
+import { useQuery, useApolloClient, useMutation } from "@apollo/react-hooks";
 import { SafeAreaView } from "react-native-safe-area-view";
 import {
   Ionicons,
@@ -53,6 +53,18 @@ const ChatRoom = ({ id }) => {
     if (!loading) setChat(data.chat);
   }, [loading]);
 
+  const addMessageMutation = gql`
+    mutation AddMessage($chatId: ID!, $content: String!) {
+      addMessage(chatId: $chatId, content: $content) {
+        id
+        content
+        createdAt
+      }
+    }
+  `;
+
+  const [addMessage] = useMutation(addMessageMutation);
+
   if (!!loading || chat === null)
     return (
       <View>
@@ -61,24 +73,51 @@ const ChatRoom = ({ id }) => {
     );
 
   const submit = messageText => {
-    const message = {
-      id: chat.messages.length + 1,
-      content: messageText,
-      createdAt: new Date(),
-      __typename: "chat"
-    };
-
-    //setChat({ ...chat, messages: [...chat.messages, message] });
-    client.writeQuery({
-      query: getMessagesQuery,
-      variables: { chatId: id },
-      data: {
-        chat: {
-          ...chat,
-          messages: [...chat.messages, message]
+    addMessage({
+      variables: { chatId: id, content: messageText },
+      optimisticResponse: {
+        __typename: "Mutation",
+        addMessage: {
+          __typename: "Message",
+          id: Math.random()
+            .toString(36)
+            .substr(2, 9),
+          createdAt: new Date(),
+          content: messageText
+        },
+        update: (client, { data }) => {
+          console.log("res", data);
+          if (data && data.addMessage) {
+            client.writeQuery({
+              data: {
+                chat: {
+                  ...chat,
+                  messages: [...chat.messages, data.addMessage]
+                }
+              }
+            });
+          }
         }
       }
     });
+    // const message = {
+    //   id: chat.messages.length + 1,
+    //   content: messageText,
+    //   createdAt: new Date(),
+    //   __typename: "chat"
+    // };
+
+    // //setChat({ ...chat, messages: [...chat.messages, message] });
+    // client.writeQuery({
+    //   query: getMessagesQuery,
+    //   variables: { chatId: id },
+    //   data: {
+    //     chat: {
+    //       ...chat,
+    //       messages: [...chat.messages, message]
+    //     }
+    //   }
+    // });
   };
 
   return (
