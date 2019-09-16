@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 9480,
+  "packagerPort": null,
+  "packagerPid": null,
   "expoServerNgrokUrl": "https://dr-vva.anonymous.whatsapp-client.exp.direct",
   "packagerNgrokUrl": "https://packager.dr-vva.anonymous.whatsapp-client.exp.direct",
-  "ngrokPid": 18772
+  "ngrokPid": 17236
 }

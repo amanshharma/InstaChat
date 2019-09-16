@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import {
   View,
   Text,
@@ -23,6 +23,8 @@ import MessageList from "./MessageList";
 import styles from "./ChatRoom.styles";
 
 const ChatRoom = ({ id }) => {
+  const [chat, setChat] = useState(null);
+
   const getMessagesQuery = gql`
     query getMessages($chatId: ID!) {
       chat(chatId: $chatId) {
@@ -46,21 +48,33 @@ const ChatRoom = ({ id }) => {
   const { loading, error, data } = useQuery(getMessagesQuery, {
     variables: { chatId: id }
   });
+  useEffect(() => {
+    if (!loading) setChat(data.chat);
+  }, [loading]);
 
-  if (!!loading)
+  if (!!loading || chat === null)
     return (
       <View>
         <Text>loading...</Text>
       </View>
     );
-  console.log("ERROR", error);
-  console.log("DATA", data);
+
+  const submit = messageText => {
+    const message = {
+      id: chat.messages.length + 1,
+      content: messageText,
+      createdAt: new Date()
+    };
+    chat.messages.concat();
+    console.log(chat);
+  };
 
   return (
     <ImageBackground
       source={require("../../../../assets/chat-bg.jpg")}
       style={{ width: "100%", height: "100%" }}
     >
+      {console.log("chat in render", chat)}
       <View style={styles.wrapper}>
         <TopNavBar
           renderLeft={() => (
@@ -75,13 +89,13 @@ const ChatRoom = ({ id }) => {
               </TouchableOpacity>
               <View style={styles.image}>
                 <Image
-                  source={{ uri: data.chat.picture }}
+                  source={{ uri: chat.picture }}
                   style={styles.thumbnail}
                 />
               </View>
               <View style={styles.navTitleContainer}>
                 <TouchableOpacity>
-                  <Text style={styles.navTitle}>{data.chat.name}</Text>
+                  <Text style={styles.navTitle}>{chat.name}</Text>
                 </TouchableOpacity>
                 <Text style={styles.navLastSeen}>Last Seen</Text>
               </View>
@@ -112,8 +126,8 @@ const ChatRoom = ({ id }) => {
         />
       </View>
       <Text>amandeep</Text>
-      <MessageList messages={data.chat.messages} />
-      <MessageInput />
+      <MessageList messages={chat.messages} />
+      <MessageInput onSendMessage={submit} />
     </ImageBackground>
   );
 };

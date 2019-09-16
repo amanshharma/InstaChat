@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -9,14 +9,22 @@ import {
 import { FontAwesome, Octicons, Entypo, AntDesign } from "@expo/vector-icons";
 import styles from "./MessageInput.styles";
 
-const MessageInput = () => {
+const MessageInput = ({ onSendMessage }) => {
+  const [message, setMessage] = useState("");
+
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
       <View style={styles.leftContent}>
         <TouchableOpacity style={styles.iconPaddingRight}>
           <Octicons name="smiley" color="grey" size={24} />
         </TouchableOpacity>
-        <TextInput placeholder="Type a message" style={styles.textInput} />
+        <TextInput
+          placeholder="Type a message"
+          style={styles.textInput}
+          onSubmitEditing={() => onSendMessage(message)}
+          value={message}
+          onChange={event => setMessage(event.nativeEvent.text)}
+        />
         <TouchableOpacity style={styles.iconPaddingRight}>
           <Entypo name="attachment" color="grey" size={24} />
         </TouchableOpacity>
