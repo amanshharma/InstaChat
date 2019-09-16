@@ -7,7 +7,7 @@ import {
   ImageBackground
 } from "react-native";
 import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useApolloClient } from "@apollo/react-hooks";
 import { SafeAreaView } from "react-native-safe-area-view";
 import {
   Ionicons,
@@ -24,6 +24,7 @@ import styles from "./ChatRoom.styles";
 
 const ChatRoom = ({ id }) => {
   const [chat, setChat] = useState(null);
+  const client = useApolloClient();
 
   const getMessagesQuery = gql`
     query getMessages($chatId: ID!) {
@@ -63,10 +64,21 @@ const ChatRoom = ({ id }) => {
     const message = {
       id: chat.messages.length + 1,
       content: messageText,
-      createdAt: new Date()
+      createdAt: new Date(),
+      __typename: "chat"
     };
 
-    setChat({ ...chat, messages: [...chat.messages, message] });
+    //setChat({ ...chat, messages: [...chat.messages, message] });
+    client.writeQuery({
+      query: getMessagesQuery,
+      variables: { chatId: id },
+      data: {
+        chat: {
+          ...chat,
+          messages: [...chat.messages, message]
+        }
+      }
+    });
   };
 
   return (
