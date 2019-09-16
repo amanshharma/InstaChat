@@ -100,24 +100,6 @@ const ChatRoom = ({ id }) => {
         }
       }
     });
-    // const message = {
-    //   id: chat.messages.length + 1,
-    //   content: messageText,
-    //   createdAt: new Date(),
-    //   __typename: "chat"
-    // };
-
-    // //setChat({ ...chat, messages: [...chat.messages, message] });
-    // client.writeQuery({
-    //   query: getMessagesQuery,
-    //   variables: { chatId: id },
-    //   data: {
-    //     chat: {
-    //       ...chat,
-    //       messages: [...chat.messages, message]
-    //     }
-    //   }
-    // });
   };
 
   return (
