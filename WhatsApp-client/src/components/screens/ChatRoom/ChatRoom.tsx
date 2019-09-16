@@ -65,8 +65,8 @@ const ChatRoom = ({ id }) => {
       content: messageText,
       createdAt: new Date()
     };
-    chat.messages.concat();
-    console.log(chat);
+
+    setChat({ ...chat, messages: [...chat.messages, message] });
   };
 
   return (

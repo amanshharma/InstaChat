@@ -21,7 +21,10 @@ const MessageInput = ({ onSendMessage }) => {
         <TextInput
           placeholder="Type a message"
           style={styles.textInput}
-          onSubmitEditing={() => onSendMessage(message)}
+          onSubmitEditing={() => {
+            onSendMessage(message);
+            setMessage("");
+          }}
           value={message}
           onChange={event => setMessage(event.nativeEvent.text)}
         />
