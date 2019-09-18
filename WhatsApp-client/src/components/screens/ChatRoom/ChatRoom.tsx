@@ -73,33 +73,33 @@ const ChatRoom = ({ id }) => {
     );
 
   const submit = messageText => {
-    addMessage({
-      variables: { chatId: id, content: messageText },
-      optimisticResponse: {
-        __typename: "Mutation",
-        addMessage: {
-          __typename: "Message",
-          id: Math.random()
-            .toString(36)
-            .substr(2, 9),
-          createdAt: new Date(),
-          content: messageText
-        },
-        update: (client, { data }) => {
-          console.log("res", data);
-          if (data && data.addMessage) {
-            client.writeQuery({
-              data: {
-                chat: {
-                  ...chat,
-                  messages: [...chat.messages, data.addMessage]
-                }
-              }
-            });
-          }
-        }
-      }
-    });
+    // addMessage({
+    //   variables: { chatId: id, content: messageText },
+    //   optimisticResponse: {
+    //     __typename: "Mutation",
+    //     addMessage: {
+    //       __typename: "Message",
+    //       id: Math.random()
+    //         .toString(36)
+    //         .substr(2, 9),
+    //       createdAt: new Date(),
+    //       content: messageText
+    //     },
+    //     update: (client, { data }) => {
+    //       console.log("res", data);
+    //       if (data && data.addMessage) {
+    //         client.writeQuery({
+    //           data: {
+    //             chat: {
+    //               ...chat,
+    //               messages: [...chat.messages, data.addMessage]
+    //             }
+    //           }
+    //         });
+    //       }
+    //     }
+    //   }
+    // });
   };
 
   return (
