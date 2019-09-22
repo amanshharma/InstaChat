@@ -11,7 +11,6 @@ const ListItem = ({
   onPress = () => {},
   timeStamp
 }) => {
-  console.log("image", image);
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <View style={styles.image}>

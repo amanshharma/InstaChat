@@ -38,8 +38,8 @@ const ChatList = () => {
         <Text>Loading...</Text>
       </View>
     );
-  console.log("data", data);
-  console.log("error", error);
+  //console.log("data", data);
+  //console.log("error", error);
 
   return (
     <View style={styles.wrapper}>
