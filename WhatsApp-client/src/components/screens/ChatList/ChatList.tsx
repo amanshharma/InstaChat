@@ -8,28 +8,9 @@ import ListItem from "../../commons/ListItem";
 import TopNavBar from "../../headers/TopNavBar";
 import styles from "./ChatList.styles";
 import { Ionicons, Entypo } from "@expo/vector-icons";
+import getChatsQuery from "../../../graphql/queries/chats.query";
 
 const ChatList = () => {
-  const getChatsQuery = gql`
-    query GetChats {
-      chats {
-        id
-        name
-        picture
-        lastMessage {
-          id
-          content
-          createdAt
-        }
-        messages {
-          id
-          content
-          createdAt
-        }
-      }
-    }
-  `;
-
   const { loading, error, data } = useQuery<any>(getChatsQuery);
   console.log("loading", loading);
   if (loading)
