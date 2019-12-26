@@ -8,7 +8,12 @@ import {
   KeyboardAvoidingView
 } from "react-native";
 import gql from "graphql-tag";
-import { useQuery, useApolloClient, useMutation } from "@apollo/react-hooks";
+import {
+  useQuery,
+  useApolloClient,
+  useMutation,
+  useSubscription
+} from "@apollo/react-hooks";
 import { SafeAreaView } from "react-native-safe-area-view";
 import {
   Ionicons,
@@ -40,14 +45,22 @@ const ChatRoom = ({ chatId }) => {
     { data: messageData, loading, called, error }
   ] = useMutation(createMessageMutation, { onError: e => {} });
 
+  const { data: dataFromSubscription } = useSubscription(messageSubscription, {
+    variables: {
+      chatId
+    }
+  });
+
   const { data } = useQuery(getMessagesQuery, {
     variables: { id: chatId },
     fetchPolicy: "cache-and-network"
   });
 
+  console.log("dataFromSubscription", dataFromSubscription);
+
   // console.log("loading", loading);
   // console.log("error", error);
-  console.log("data", data);
+  //console.log("data", data);
 
   const addMessageFunction = messageString => {
     //console.log("addMessageData", messageData);
@@ -77,8 +90,8 @@ const ChatRoom = ({ chatId }) => {
           query: getMessagesQuery,
           variables: { id: chatId }
         });
-        console.log("CachedData: ", data);
-        console.log("addMessage: ", addMessage);
+        //console.log("CachedData: ", data);
+        //console.log("addMessage: ", addMessage);
         const i = 0;
 
         const newData = [addMessage, ...data.getMessages];
@@ -101,7 +114,7 @@ const ChatRoom = ({ chatId }) => {
           variables: { id: chatId }
         });
 
-        console.log("dataone ##", data1);
+        // console.log("dataone ##", data1);
       }
     }).then(res => console.log(res));
     //console.log("addMessageData", messageData);
