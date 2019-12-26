@@ -5,6 +5,9 @@ export default gql`
     message(chatId: $chatId) {
       id
       message
+      user {
+        email
+      }
     }
   }
 `;

@@ -57,6 +57,26 @@ const ChatRoom = ({ chatId }) => {
   });
 
   console.log("dataFromSubscription", dataFromSubscription);
+  if (!!dataFromSubscription) {
+    const cachedData = client.readQuery({
+      query: getMessagesQuery,
+      variables: { id: chatId }
+    });
+
+    const newData = [dataFromSubscription.message, ...data.getMessages];
+    try {
+      client.writeQuery({
+        query: getMessagesQuery,
+        variables: { id: chatId },
+        data: {
+          ...data,
+          getMessages: newData
+        }
+      });
+    } catch (e) {
+      console.log("error output: ", e);
+    }
+  }
 
   // console.log("loading", loading);
   // console.log("error", error);
