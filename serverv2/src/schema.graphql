@@ -11,6 +11,10 @@ type Mutation {
   #register(email: String!, password: String!): User
 }
 
+type Subscription {
+  message(chatId: ID!): Message!
+}
+
 type User {
   id: ID!
   email: String!

@@ -26,6 +26,7 @@ import styles from "./ChatRoom.styles";
 
 import getMessagesQuery from "../../../graphql/queries/messages.query";
 import createMessageMutation from "../../../graphql/mutations/createMessage.mutation";
+import messageSubscription from "../../../graphql/subscriptions/message.subscription";
 
 const ChatRoom = ({ chatId }) => {
   //console.log("ID in chatroom", chatId);

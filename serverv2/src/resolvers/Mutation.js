@@ -13,13 +13,18 @@ export default {
           },
           user: {
             connect: {
-              id: "ck4j374ho00fy0737binvd00f"
+              //id: "ck4j374ho00fy0737binvd00f"
+              id: "ck4jyzes500lk0737pme8tqms"
             }
           }
         }
       },
       info
     );
+
+    pubsub.publish(`message ${id}`, {
+      message: result
+    });
 
     console.log(result);
     return result;
