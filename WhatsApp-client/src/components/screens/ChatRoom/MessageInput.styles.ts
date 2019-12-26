@@ -11,13 +11,14 @@ const styles = StyleSheet.create({
   },
   leftContent: {
     flexDirection: "row",
-    flexGrow: 1,
+    flexShrink: 1,
+    width: "100%",
     padding: 12,
     backgroundColor: "white",
     borderRadius: 25
   },
   textInput: {
-    flexGrow: 1
+    flex: 1
   },
   microphone: {
     display: "flex",

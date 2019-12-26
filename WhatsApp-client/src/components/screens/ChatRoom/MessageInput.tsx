@@ -6,25 +6,29 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView
 } from "react-native";
-import { FontAwesome, Octicons, Entypo, AntDesign } from "@expo/vector-icons";
+import {
+  FontAwesome,
+  Octicons,
+  Entypo,
+  AntDesign,
+  MaterialIcons
+} from "@expo/vector-icons";
 import styles from "./MessageInput.styles";
 
 const MessageInput = ({ onSendMessage }) => {
   const [message, setMessage] = useState("");
 
   return (
-    <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
+    <View style={styles.wrapper}>
       <View style={styles.leftContent}>
         <TouchableOpacity style={styles.iconPaddingRight}>
           <Octicons name="smiley" color="grey" size={24} />
         </TouchableOpacity>
         <TextInput
           placeholder="Type a message"
+          multiline
           style={styles.textInput}
-          onSubmitEditing={() => {
-            onSendMessage(message);
-            setMessage("");
-          }}
+          onSubmitEditing={() => {}}
           value={message}
           onChange={event => setMessage(event.nativeEvent.text)}
         />
@@ -35,10 +39,22 @@ const MessageInput = ({ onSendMessage }) => {
           <AntDesign name="camera" color="grey" size={24} />
         </TouchableOpacity>
       </View>
-      <View style={styles.microphone}>
-        <FontAwesome name="microphone" color="white" size={24} />
-      </View>
-    </KeyboardAvoidingView>
+      <TouchableOpacity
+        style={styles.microphone}
+        onPress={() => {
+          if (message.trim().length > 0) {
+            onSendMessage(message);
+            setMessage("");
+          }
+        }}
+      >
+        {message.trim().length <= 0 ? (
+          <FontAwesome name="microphone" color="white" size={24} />
+        ) : (
+          <MaterialIcons name="send" color="white" size={24} />
+        )}
+      </TouchableOpacity>
+    </View>
   );
 };
 

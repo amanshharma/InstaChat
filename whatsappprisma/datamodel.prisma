@@ -1,0 +1,21 @@
+type User {
+  id: ID! @unique @id
+  email: String!
+  password: String!
+  chats: [Chat]
+}
+
+type Chat {
+    id: ID! @unique @id
+    name: String
+    messages: [Message]
+    friends: [User]
+}
+
+type Message {
+    id: ID! @unique @id
+    message: String
+    chat: Chat
+    user: User
+    createdAt: DateTime! @createdAt
+}

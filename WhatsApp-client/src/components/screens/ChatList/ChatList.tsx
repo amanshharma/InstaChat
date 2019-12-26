@@ -12,15 +12,16 @@ import getChatsQuery from "../../../graphql/queries/chats.query";
 
 const ChatList = () => {
   const { loading, error, data } = useQuery<any>(getChatsQuery);
-  console.log("loading", loading);
+  //console.log("loading", loading, error);
+  //console.log("DATA", data);
   if (loading)
     return (
       <View>
         <Text>Loading...</Text>
       </View>
     );
-  //console.log("data", data);
-  //console.log("error", error);
+  console.log("data", data);
+  console.log("error", error);
 
   return (
     <View style={styles.wrapper}>
@@ -44,14 +45,14 @@ const ChatList = () => {
         )}
       />
       <FlatList
-        data={data.chats}
+        data={!!data ? data.getChats : []}
         renderItem={({ item }) => (
           <ListItem
-            title={item.name}
-            subTitle={item.lastMessage.content}
+            title={item?.name}
+            subTitle={item?.lastMessage?.content}
             image={item.picture}
-            timeStamp={moment(item.lastMessage.createdAt).format("HH:mm")}
-            onPress={() => Actions.chatroom({ id: item.id })}
+            timeStamp={moment(item?.lastMessage?.createdAt).format("HH:mm")}
+            onPress={() => Actions.chatroom({ chatId: item.id })}
           />
         )}
         keyExtractor={item => item.id}

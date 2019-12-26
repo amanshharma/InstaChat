@@ -1,0 +1,33 @@
+scalar Date
+
+type Query {
+  getMessages(id: ID!): [Message]
+  getChats: [Chat]!
+}
+
+type Mutation {
+  addMessage(id: ID!, message: String!): Message!
+  #addChat(chatName: String!, userId: ID!): Chat
+  #register(email: String!, password: String!): User
+}
+
+type User {
+  id: ID!
+  email: String!
+  chats: [Chat]
+}
+
+type Chat {
+  id: ID!
+  name: String
+  messages: [Message]
+  friends: [User]
+}
+
+type Message {
+  id: ID!
+  message: String
+  chat: Chat
+  user: User
+  createdAt: Date
+}

@@ -1,3 +1,5 @@
 WhatsApp-client/node_modules/
 WhatsApp-client/httpU*
+WhatsApp-client/.expo/web/cache/
 WhatsApp-server/node_modules/
+serverv2/node_modules/

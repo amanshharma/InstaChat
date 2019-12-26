@@ -1,0 +1,19 @@
+{
+  "name": "serverv2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/register": "^7.7.4",
+    "graphql-yoga": "^1.18.3",
+    "prisma-binding": "^2.3.16",
+    "regenerator-runtime": "^0.13.3"
+  }
+}

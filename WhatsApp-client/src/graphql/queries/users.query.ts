@@ -1,13 +1,12 @@
 import gql from "graphql-tag";
 
 export default gql`
-  query GetChats {
-    getChats {
+  query GetUsers {
+    users {
       id
+      username
       name
-      friends {
-        id
-      }
+      picture
     }
   }
 `;
