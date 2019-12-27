@@ -12,7 +12,9 @@
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.6",
     "@babel/register": "^7.7.4",
+    "bcryptjs": "^2.4.3",
     "graphql-yoga": "^1.18.3",
+    "jsonwebtoken": "^8.5.1",
     "prisma-binding": "^2.3.16",
     "regenerator-runtime": "^0.13.3"
   }

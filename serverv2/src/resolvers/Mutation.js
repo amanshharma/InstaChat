@@ -1,7 +1,15 @@
+const APP_SECRET = "abcdefghijklmnopqrst";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+//const bcrypt = require('bcryptjs');
+//const jwt = require('jsonwebtoken');
+
 export default {
   async addMessage(parent, query, { prisma, pubsub }, info) {
-    console.log("query one", query);
-    const { id, message } = query;
+    //console.log("query one", query);
+    const { id, message, senderId } = query;
+    //console.log("query senderId", senderId);
+
     const result = await prisma.mutation.createMessage(
       {
         data: {
@@ -13,8 +21,7 @@ export default {
           },
           user: {
             connect: {
-              id: "ck4j374ho00fy0737binvd00f"
-              //id: "ck4jyzes500lk0737pme8tqms"
+              id: senderId
             }
           }
         }
@@ -26,7 +33,27 @@ export default {
       message: result
     });
 
-    console.log(result);
+    //(result);
     return result;
+  },
+  async login(parent, query, { prisma, pubsub }, info) {
+    const { username, password } = query;
+    const user = await prisma.query.user(
+      {
+        where: {
+          email: username
+        }
+      },
+      "{id, email}"
+    );
+
+    console.log(user);
+
+    const token = jwt.sign({ userId: user.id }, APP_SECRET);
+
+    return {
+      user,
+      token
+    };
   }
 };

@@ -57,26 +57,35 @@ const ChatRoom = ({ chatId }) => {
   });
 
   console.log("dataFromSubscription", dataFromSubscription);
-  if (!!dataFromSubscription) {
-    const cachedData = client.readQuery({
-      query: getMessagesQuery,
-      variables: { id: chatId }
-    });
 
-    const newData = [dataFromSubscription.message, ...data.getMessages];
-    try {
-      client.writeQuery({
+  useEffect(() => {
+    if (!!dataFromSubscription) {
+      const cachedData = client.readQuery({
         query: getMessagesQuery,
-        variables: { id: chatId },
-        data: {
-          ...data,
-          getMessages: newData
-        }
+        variables: { id: chatId }
       });
-    } catch (e) {
-      console.log("error output: ", e);
+
+      const isMessagePresent = cachedData.getMessages.find(
+        item => item.id === dataFromSubscription.message.id
+      );
+
+      const newData = [dataFromSubscription.message, ...cachedData.getMessages];
+      if (!isMessagePresent) {
+        try {
+          client.writeQuery({
+            query: getMessagesQuery,
+            variables: { id: chatId },
+            data: {
+              ...data,
+              getMessages: newData
+            }
+          });
+        } catch (e) {
+          console.log("error output: ", e);
+        }
+      }
     }
-  }
+  }, [dataFromSubscription?.message?.id]);
 
   // console.log("loading", loading);
   // console.log("error", error);
@@ -86,7 +95,11 @@ const ChatRoom = ({ chatId }) => {
     //console.log("addMessageData", messageData);
 
     addMessage({
-      variables: { id: chatId, message: messageString },
+      variables: {
+        id: chatId,
+        message: messageString,
+        senderId: "ck4j374ho00fy0737binvd00f"
+      },
       // refetchQueries: [
       //   {
       //     query: getMessagesQuery,
@@ -163,7 +176,7 @@ const ChatRoom = ({ chatId }) => {
                 </View>
                 <View style={styles.navTitleContainer}>
                   <TouchableOpacity>
-                    <Text style={styles.navTitle}>{name}</Text>
+                    <Text style={styles.navTitle}>Temp</Text>
                   </TouchableOpacity>
                   <Text style={styles.navLastSeen}>Last Seen</Text>
                 </View>

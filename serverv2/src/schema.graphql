@@ -6,7 +6,8 @@ type Query {
 }
 
 type Mutation {
-  addMessage(id: ID!, message: String!): Message!
+  addMessage(id: ID!, message: String!, senderId: ID!): Message!
+  login(username: String!, password: String!): AuthenticationPayload!
   #addChat(chatName: String!, userId: ID!): Chat
   #register(email: String!, password: String!): User
 }
@@ -34,4 +35,9 @@ type Message {
   chat: Chat
   user: User
   createdAt: Date
+}
+
+type AuthenticationPayload {
+  user: User!
+  token: String!
 }

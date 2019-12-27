@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 19264,
-  "expoServerNgrokUrl": "https://qe-ibt.amanshharma.whatsapp-client.exp.direct",
-  "packagerNgrokUrl": "https://packager.qe-ibt.amanshharma.whatsapp-client.exp.direct",
-  "ngrokPid": 1588
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": "https://4h-e6h.amanshharma.whatsapp-client.exp.direct",
+  "packagerNgrokUrl": "https://packager.4h-e6h.amanshharma.whatsapp-client.exp.direct",
+  "ngrokPid": 21552
 }

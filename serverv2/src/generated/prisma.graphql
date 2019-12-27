@@ -1,5 +1,5 @@
 # source: http://192.168.99.100:4466
-# timestamp: Mon Dec 23 2019 19:54:56 GMT-0500 (Eastern Standard Time)
+# timestamp: Fri Dec 27 2019 12:53:55 GMT-0500 (Eastern Standard Time)
 
 type AggregateChat {
   count: Int!
@@ -1281,4 +1281,5 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
 }
