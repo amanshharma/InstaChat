@@ -14,13 +14,10 @@ import { getStatusBarHeight } from "react-native-safe-area-view";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { Router, Scene, Actions, Stack } from "react-native-router-flux";
-import styles from "./App.styles";
 
-const scenes = Actions.create(
-  <Scene key="root">
-    <Scene key="chatList" component={ChatList} title="Chats" initial={true} />
-  </Scene>
-);
+import LoginComponent from "./src/components/screens/Auth/Login";
+
+import styles from "./App.styles";
 
 const theme = createMuiTheme({
   palette: {
@@ -37,7 +34,7 @@ export default function App() {
           <Stack key="root">
             <Scene
               key="login"
-              component={ChatList}
+              component={LoginComponent}
               title="WhatsApp"
               initial={true}
               hideNavBar
