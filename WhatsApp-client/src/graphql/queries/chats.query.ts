@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export default gql`
-  query GetChats {
-    getChats {
+  query GetChats($chatIds: [ID!]) {
+    getChats(chatIds: $chatIds) {
       id
       name
       friends {

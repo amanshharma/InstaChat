@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
     marginTop: getStatusBarHeight()
   },
   navRightContent: {
-    flexDirection: "row"
+    flexDirection: "row",
+    alignItems: "center"
   },
   icon: {
     paddingHorizontal: 5

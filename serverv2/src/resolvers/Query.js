@@ -16,6 +16,15 @@ export default {
     return res;
   },
   async getChats(parent, query, { prisma, pubsub }, info) {
-    return await prisma.query.chats(null, info);
+    const { chatIds } = query;
+    console.log("CHATIDS", chatIds);
+    return await prisma.query.chats(
+      {
+        where: {
+          id_in: chatIds
+        }
+      },
+      info
+    );
   }
 };

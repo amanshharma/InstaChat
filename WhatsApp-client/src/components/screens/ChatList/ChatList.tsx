@@ -10,10 +10,19 @@ import styles from "./ChatList.styles";
 import { Ionicons, Entypo } from "@expo/vector-icons";
 import getChatsQuery from "../../../graphql/queries/chats.query";
 
-const ChatList = () => {
-  const { loading, error, data } = useQuery<any>(getChatsQuery);
-  //console.log("loading", loading, error);
-  //console.log("DATA", data);
+const ChatList = ({ user }) => {
+  const chatIds = [];
+  user?.chats.map(item => {
+    chatIds.push(item.id);
+  });
+  console.log(chatIds);
+  const { loading, error, data } = useQuery<any>(getChatsQuery, {
+    variables: {
+      chatIds
+    }
+  });
+  console.log("loading", loading, error);
+  console.log("DATA", data);
   if (loading)
     return (
       <View>
@@ -26,9 +35,12 @@ const ChatList = () => {
   return (
     <View style={styles.wrapper}>
       <TopNavBar
-        renderLeft={() => <Text style={styles.title}>WhatsApp</Text>}
+        renderLeft={() => <Text style={styles.title}>InstaChat</Text>}
         renderRight={() => (
           <View style={styles.navRightContent}>
+            <Text style={{ color: "#ffffff", marginRight: 8, fontSize: 18 }}>
+              {user?.email}
+            </Text>
             <Ionicons
               name="md-search"
               size={24}

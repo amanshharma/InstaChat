@@ -24,9 +24,10 @@ const Login = () => {
         password
       }
     }).then(({ data }) => {
+      const { user } = data?.login;
       if (!!data?.login?.user?.id) {
-        console.log("Inside If");
-        Actions.home();
+        console.log("Inside If", user);
+        Actions.home({ user });
       }
     });
   };
@@ -70,7 +71,14 @@ const Login = () => {
             <Text style={{ fontSize: 30, color: "#2c6157" }}> Chat</Text>
           </View>
         </View>
-        <Card style={{ padding: 15, width: "90%", alignSelf: "center" }}>
+        <Card
+          style={{
+            padding: 15,
+            width: "90%",
+            alignSelf: "center",
+            backgroundColor: "#f7f4f0"
+          }}
+        >
           <Item>
             <Icon active name="user" type="AntDesign" />
             <Input

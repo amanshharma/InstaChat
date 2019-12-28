@@ -45,7 +45,7 @@ export default function App() {
               title="Register"
               hideNavBar
             />
-            <Scene key="home" component={ChatList} />
+            <Scene key="home" component={ChatList} hideNavBar />
           </Stack>
         </Router>
       </ApolloProvider>

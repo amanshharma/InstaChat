@@ -44,10 +44,10 @@ export default {
           email: username
         }
       },
-      "{id, email}"
+      "{id, email, chats {id}}"
     );
 
-    console.log(user);
+    //console.log(user);
 
     const token = jwt.sign({ userId: user.id }, APP_SECRET);
 
