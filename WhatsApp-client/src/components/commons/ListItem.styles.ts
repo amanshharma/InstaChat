@@ -6,11 +6,14 @@ export default StyleSheet.create({
   container: {
     width: "100%",
     flexDirection: "row",
-    padding: 20,
-    alignItems: "center"
+    alignItems: "center",
+    paddingHorizontal: 20
   },
   content: {
-    flexGrow: 1
+    flexGrow: 1,
+    borderBottomColor: "#bfbfbf",
+    borderBottomWidth: 1,
+    paddingVertical: 15
   },
   thumbnail: {
     width: 60,
