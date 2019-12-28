@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, FlatList } from "react-native";
 
-const MessageList = ({ messages = [] }) => {
+const MessageList = ({ messages = [], loggedinUser }) => {
   return (
     <FlatList
       data={messages}
@@ -11,7 +11,9 @@ const MessageList = ({ messages = [] }) => {
         <View style={{ height: 6, width: "100%" }}></View>
       )}
       renderItem={({ item }) => {
-        const isOwner = item.user.email === "user";
+        //console.log("item", item);
+        //console.log("loggedinUser", loggedinUser);
+        const isOwner = item.user.id === loggedinUser.id;
         return (
           <View style={{ flex: 1 }}>
             <Text

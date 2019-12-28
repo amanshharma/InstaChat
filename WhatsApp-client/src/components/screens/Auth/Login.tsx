@@ -23,13 +23,15 @@ const Login = () => {
         username,
         password
       }
-    }).then(({ data }) => {
-      const { user } = data?.login;
-      if (!!data?.login?.user?.id) {
-        console.log("Inside If", user);
-        Actions.home({ user });
-      }
-    });
+    })
+      .then(({ data }) => {
+        const { user } = data?.login;
+        if (!!data?.login?.user?.id) {
+          console.log("Inside If", user);
+          Actions.home({ user });
+        }
+      })
+      .catch(e => console.log("Error", e));
   };
 
   return (

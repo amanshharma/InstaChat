@@ -45,6 +45,8 @@ const ChatRoom = ({ chatId, loggedinUser }) => {
     { data: messageData, loading, called, error }
   ] = useMutation(createMessageMutation, { onError: e => {} });
 
+  console.log("messageData --", messageData, loading);
+
   const { data: dataFromSubscription } = useSubscription(messageSubscription, {
     variables: {
       chatId
@@ -59,7 +61,7 @@ const ChatRoom = ({ chatId, loggedinUser }) => {
   console.log("dataFromSubscription", dataFromSubscription);
 
   useEffect(() => {
-    if (!!dataFromSubscription) {
+    if (!!dataFromSubscription && !!messageData) {
       const cachedData = client.readQuery({
         query: getMessagesQuery,
         variables: { id: chatId }
@@ -114,6 +116,7 @@ const ChatRoom = ({ chatId, loggedinUser }) => {
           message: messageString,
           user: {
             __typename: "User",
+            id: `${chatId}abc`,
             email: "user"
           }
         }
@@ -206,7 +209,7 @@ const ChatRoom = ({ chatId, loggedinUser }) => {
             )}
           />
         </View>
-        <MessageList messages={data?.getMessages} />
+        <MessageList messages={data?.getMessages} loggedinUser={loggedinUser} />
         <MessageInput onSendMessage={addMessageFunction} />
       </ImageBackground>
     </KeyboardAvoidingView>
