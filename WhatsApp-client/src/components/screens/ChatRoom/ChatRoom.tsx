@@ -33,7 +33,7 @@ import getMessagesQuery from "../../../graphql/queries/messages.query";
 import createMessageMutation from "../../../graphql/mutations/createMessage.mutation";
 import messageSubscription from "../../../graphql/subscriptions/message.subscription";
 
-const ChatRoom = ({ chatId }) => {
+const ChatRoom = ({ chatId, loggedinUser }) => {
   //console.log("ID in chatroom", chatId);
   const [chat, setChat] = useState({});
   const client = useApolloClient();
@@ -214,85 +214,3 @@ const ChatRoom = ({ chatId }) => {
 };
 
 export default ChatRoom;
-
-// useEffect(() => {
-//   if (!loading) setChat(data.chat);
-// }, [loading]);
-
-// const addMessageMutation = gql`
-//   mutation AddMessage($chatId: ID!, $content: String!) {
-//     addMessage(chatId: $chatId, content: $content) {
-//       id
-//       content
-//       createdAt
-//     }
-//   }
-// `;
-
-//const [addMessage, { data: mutationData }] = useMutation(addMessageMutation);
-
-// if (!!loading || chat === null)
-//   return (
-//     <View>
-//       <Text>loading...</Text>
-//     </View>
-//   );
-
-//console.log("mutationData", mutationData);
-
-// let clientChatsData;
-// try {
-//   clientChatsData = client.readQuery({
-//     query: getChatsQuery
-//   });
-// } catch (e) {
-//   return;
-// }
-// const chats = clientChatsData.chats;
-// const chatIndex = chats.findIndex(
-//   (currentChat: any) => currentChat.id === id
-// );
-// if (chatIndex === -1) return;
-// const chatWhereAdded = chats[chatIndex];
-// if ((mutationData || {}).addMessage) {
-//   console.log("indie");
-//   chatWhereAdded.lastMessage = mutationData.addMessage;
-//   // The chat will appear at the top of the ChatsList component
-//   chats.splice(chatIndex, 1);
-//   chats.unshift(chatWhereAdded);
-//   client.writeQuery({
-//     query: chatsQuery,
-//     data: { chats: chats }
-//   });
-// }
-
-// const submit = messageText => {
-//   console.log("mesageText", messageText);
-//   addMessage({
-//     variables: { chatId: id, content: messageText },
-//     optimisticResponse: {
-//       __typename: "Mutation",
-//       addMessage: {
-//         __typename: "Message",
-//         id: Math.random()
-//           .toString(36)
-//           .substr(2, 9),
-//         createdAt: new Date(),
-//         content: messageText
-//       },
-//       update: (client, { data }) => {
-//         console.log("res", data);
-//         // if (data && data.addMessage) {
-//         //   client.writeQuery({
-//         //     data: {
-//         //       chat: {
-//         //         ...chat,
-//         //         messages: [...chat.messages, data.addMessage]
-//         //       }
-//         //     }
-//         //   });
-//         // }
-//       }
-//     }
-//   });
-// };

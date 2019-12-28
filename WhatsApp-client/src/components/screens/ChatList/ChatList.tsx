@@ -77,7 +77,9 @@ const ChatList = ({ user }) => {
             subTitle={item?.lastMessage?.content || "no message"}
             image={item.picture}
             timeStamp={moment(item?.lastMessage?.createdAt).format("HH:mm")}
-            onPress={() => Actions.chatroom({ chatId: item.id })}
+            onPress={() =>
+              Actions.chatroom({ chatId: item.id, loggedinUser: user })
+            }
           />
         )}
         keyExtractor={item => item.id}
