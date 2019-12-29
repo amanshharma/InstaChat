@@ -92,6 +92,7 @@ const Login = () => {
           <Item>
             <Icon active name="lock" type="AntDesign" />
             <Input
+              secureTextEntry
               placeholder="Password"
               value={password}
               onChangeText={text => setPassword(text)}
