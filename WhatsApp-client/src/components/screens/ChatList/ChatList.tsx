@@ -74,10 +74,12 @@ const ChatList = ({ user }) => {
         renderItem={({ item }) => (
           <ListItem
             title={item?.name}
-            subTitle={item?.lastMessage?.content || "no message"}
+            subTitle={`${item?.friends.length - 1} ${
+              item?.friends.length - 1 === 1 ? "Member" : "Members"
+            }`}
             image={item.picture}
-            isGroupChat={item?.friends.length > 1}
-            timeStamp={moment(item?.lastMessage?.createdAt).format("HH:mm")}
+            isGroupChat={item?.friends.length > 2}
+            //timeStamp={moment(item?.lastMessage?.createdAt).format("HH:mm")}
             onPress={() => Actions.chatroom({ chat: item, loggedinUser: user })}
           />
         )}
