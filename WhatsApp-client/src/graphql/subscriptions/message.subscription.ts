@@ -6,6 +6,7 @@ export default gql`
       id
       message
       user {
+        id
         email
       }
     }

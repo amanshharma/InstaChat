@@ -33,12 +33,13 @@ import getMessagesQuery from "../../../graphql/queries/messages.query";
 import createMessageMutation from "../../../graphql/mutations/createMessage.mutation";
 import messageSubscription from "../../../graphql/subscriptions/message.subscription";
 
-const ChatRoom = ({ chatId, loggedinUser }) => {
+const ChatRoom = ({
+  chat: { id: chatId, name: chatRoomName },
+  loggedinUser
+}) => {
   //console.log("ID in chatroom", chatId);
   const [chat, setChat] = useState({});
   const client = useApolloClient();
-
-  const loggedinUserId = "ck4jyzes500lk0737pme8tqms";
 
   const [
     addMessage,
@@ -61,7 +62,7 @@ const ChatRoom = ({ chatId, loggedinUser }) => {
   console.log("dataFromSubscription", dataFromSubscription);
 
   useEffect(() => {
-    if (!!dataFromSubscription && !!messageData) {
+    if (!!dataFromSubscription && !loading) {
       const cachedData = client.readQuery({
         query: getMessagesQuery,
         variables: { id: chatId }
@@ -87,7 +88,7 @@ const ChatRoom = ({ chatId, loggedinUser }) => {
         }
       }
     }
-  }, [dataFromSubscription?.message?.id]);
+  }, [dataFromSubscription?.message?.id, loading]);
 
   // console.log("loading", loading);
   // console.log("error", error);
@@ -100,7 +101,7 @@ const ChatRoom = ({ chatId, loggedinUser }) => {
       variables: {
         id: chatId,
         message: messageString,
-        senderId: "ck4j374ho00fy0737binvd00f"
+        senderId: loggedinUser?.id
       },
       // refetchQueries: [
       //   {
@@ -116,8 +117,8 @@ const ChatRoom = ({ chatId, loggedinUser }) => {
           message: messageString,
           user: {
             __typename: "User",
-            id: `${chatId}abc`,
-            email: "user"
+            id: loggedinUser?.id,
+            email: loggedinUser?.email
           }
         }
       },
@@ -174,14 +175,14 @@ const ChatRoom = ({ chatId, loggedinUser }) => {
                     color="white"
                   />
                 </TouchableOpacity>
-                <View style={styles.image}>
+                {/* <View style={styles.image}>
                   <Image source={{ uri: undefined }} style={styles.thumbnail} />
-                </View>
+                </View> */}
                 <View style={styles.navTitleContainer}>
                   <TouchableOpacity>
-                    <Text style={styles.navTitle}>Temp</Text>
+                    <Text style={styles.navTitle}>{chatRoomName}</Text>
                   </TouchableOpacity>
-                  <Text style={styles.navLastSeen}>Last Seen</Text>
+                  <Text style={styles.navLastSeen}>Chat Room</Text>
                 </View>
               </View>
             )}

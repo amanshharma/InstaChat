@@ -6,8 +6,9 @@ export default StyleSheet.create({
   container: {
     width: "100%",
     flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 20
+    height: 75,
+    alignItems: "flex-end",
+    paddingHorizontal: 10
   },
   content: {
     flexGrow: 1,
@@ -16,12 +17,9 @@ export default StyleSheet.create({
     paddingVertical: 15
   },
   thumbnail: {
-    width: 60,
-    height: 60,
-    borderRadius: 60 / 2
-  },
-  image: {
-    paddingRight: 10
+    width: 65,
+    height: 65,
+    borderRadius: 65 / 2
   },
   titleContainer: {
     flexDirection: "row",

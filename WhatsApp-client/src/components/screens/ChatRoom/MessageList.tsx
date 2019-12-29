@@ -13,6 +13,7 @@ const MessageList = ({ messages = [], loggedinUser }) => {
       renderItem={({ item }) => {
         //console.log("item", item);
         //console.log("loggedinUser", loggedinUser);
+        if (item.message === "eoeo") console.log("YUP", item.user.id);
         const isOwner = item.user.id === loggedinUser.id;
         return (
           <View style={{ flex: 1 }}>
