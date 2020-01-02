@@ -1,7 +1,7 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import { View, FlatList, Text, TouchableOpacity } from "react-native";
 import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import moment from "moment";
 import { Actions } from "react-native-router-flux";
 import ListItem from "../../commons/ListItem";
@@ -9,6 +9,7 @@ import TopNavBar from "../../headers/TopNavBar";
 import styles from "./ChatList.styles";
 import { Ionicons, Entypo, AntDesign } from "@expo/vector-icons";
 import getChatsQuery from "../../../graphql/queries/chats.query";
+import createChatMutation from "../../../graphql/mutations/createChat.mutation";
 
 const ChatList = ({ user }) => {
   const chatIds = [];
@@ -21,6 +22,8 @@ const ChatList = ({ user }) => {
       chatIds
     }
   });
+
+  const { createChat } = useMutation(createChatMutation);
   console.log("loading", loading, error);
   console.log("DATA", data);
   if (loading)
@@ -68,6 +71,23 @@ const ChatList = ({ user }) => {
           </View>
         )}
       />
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          padding: 10
+        }}
+      >
+        <TouchableOpacity style={{}}>
+          <Text style={{ padding: 10 }}>All Chats</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{ borderWidth: 2, borderColor: "#2c6157", borderRadius: 20 }}
+          onPress={() => Actions.createChat()}
+        >
+          <Text style={{ padding: 10 }}>Create New Chat</Text>
+        </TouchableOpacity>
+      </View>
       <FlatList
         data={!!data ? data.getChats : []}
         style={{ marginTop: 10 }}

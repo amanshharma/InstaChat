@@ -55,5 +55,24 @@ export default {
       user,
       token
     };
+  },
+  async addChat(parent, query, { prisma, pubsub }, info) {
+    console.log("chats data", query);
+    const { chatName, userIds } = query;
+    const connect = [];
+    userIds.forEach(id => {
+      connect.push({ id });
+    });
+    return await prisma.mutation.createChat(
+      {
+        data: {
+          name: chatName,
+          friends: {
+            connect
+          }
+        }
+      },
+      info
+    );
   }
 };

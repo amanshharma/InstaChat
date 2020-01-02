@@ -16,6 +16,7 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { Router, Scene, Actions, Stack } from "react-native-router-flux";
 
 import LoginComponent from "./src/components/screens/Auth/Login";
+import CreateChat from "./src/components/screens/CreateChat";
 
 import styles from "./App.styles";
 
@@ -43,6 +44,12 @@ export default function App() {
               key="chatroom"
               component={ChatRoom}
               title="Register"
+              hideNavBar
+            />
+            <Scene
+              key="createChat"
+              component={CreateChat}
+              title="Create Chat"
               hideNavBar
             />
             <Scene key="home" component={ChatList} hideNavBar />
