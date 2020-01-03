@@ -37,7 +37,6 @@ const ChatRoom = ({
   chat: { id: chatId, name: chatRoomName },
   loggedinUser
 }) => {
-  //console.log("ID in chatroom", chatId);
   const [chat, setChat] = useState({});
   const client = useApolloClient();
 
@@ -45,8 +44,6 @@ const ChatRoom = ({
     addMessage,
     { data: messageData, loading, called, error }
   ] = useMutation(createMessageMutation, { onError: e => {} });
-
-  console.log("messageData --", messageData, loading);
 
   const { data: dataFromSubscription } = useSubscription(messageSubscription, {
     variables: {
@@ -58,8 +55,6 @@ const ChatRoom = ({
     variables: { id: chatId },
     fetchPolicy: "cache-and-network"
   });
-
-  console.log("dataFromSubscription", dataFromSubscription);
 
   useEffect(() => {
     if (!!dataFromSubscription && !loading) {
@@ -90,13 +85,7 @@ const ChatRoom = ({
     }
   }, [dataFromSubscription?.message?.id, loading]);
 
-  // console.log("loading", loading);
-  // console.log("error", error);
-  //console.log("data", data);
-
   const addMessageFunction = messageString => {
-    //console.log("addMessageData", messageData);
-
     addMessage({
       variables: {
         id: chatId,
@@ -127,8 +116,6 @@ const ChatRoom = ({
           query: getMessagesQuery,
           variables: { id: chatId }
         });
-        //console.log("CachedData: ", data);
-        //console.log("addMessage: ", addMessage);
         const i = 0;
 
         const newData = [addMessage, ...data.getMessages];
@@ -150,11 +137,8 @@ const ChatRoom = ({
           query: getMessagesQuery,
           variables: { id: chatId }
         });
-
-        // console.log("dataone ##", data1);
       }
     }).then(res => console.log(res));
-    //console.log("addMessageData", messageData);
   };
 
   return (

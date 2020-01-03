@@ -3,6 +3,7 @@ scalar Date
 type Query {
   getMessages(id: ID!): [Message]
   getChats(chatIds: [ID!]): [Chat]!
+  getUsers: [User]
 }
 
 type Mutation {

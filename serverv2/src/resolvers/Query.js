@@ -17,7 +17,7 @@ export default {
   },
   async getChats(parent, query, { prisma, pubsub }, info) {
     const { chatIds } = query;
-    console.log("CHATIDS", chatIds);
+    //console.log("CHATIDS", chatIds);
     return await prisma.query.chats(
       {
         where: {
@@ -26,5 +26,9 @@ export default {
       },
       info
     );
+  },
+  async getUsers(parent, query, { prisma }, info) {
+    //console.log("QUER", query);
+    return await prisma.query.users(null, info);
   }
 };

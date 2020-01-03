@@ -27,7 +27,6 @@ const Login = () => {
       .then(({ data }) => {
         const { user } = data?.login;
         if (!!data?.login?.user?.id) {
-          console.log("Inside If", user);
           Actions.home({ user });
         }
       })
