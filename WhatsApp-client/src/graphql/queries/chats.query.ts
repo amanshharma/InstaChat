@@ -8,10 +8,6 @@ export default gql`
       friends {
         id
       }
-      messages {
-        createdAt
-        message
-      }
     }
   }
 `;

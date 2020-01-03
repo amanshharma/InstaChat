@@ -16,7 +16,6 @@ const ChatList = ({ user }) => {
   user?.chats.map(item => {
     chatIds.push(item.id);
   });
-  console.log(chatIds);
   const { loading, error, data } = useQuery<any>(getChatsQuery, {
     variables: {
       chatIds
@@ -24,16 +23,14 @@ const ChatList = ({ user }) => {
   });
 
   const { createChat } = useMutation(createChatMutation);
-  console.log("loading", loading, error);
-  console.log("DATA", data);
   if (loading)
     return (
       <View>
         <Text>Loading...</Text>
       </View>
     );
-  console.log("data", data);
-  console.log("error", error);
+
+  console.log("DDATTA", data);
 
   return (
     <View style={styles.wrapper}>
@@ -83,7 +80,7 @@ const ChatList = ({ user }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={{ borderWidth: 2, borderColor: "#2c6157", borderRadius: 20 }}
-          onPress={() => Actions.createChat()}
+          onPress={() => Actions.createChat({ chatIds })}
         >
           <Text style={{ padding: 10 }}>Create New Chat</Text>
         </TouchableOpacity>
@@ -91,18 +88,23 @@ const ChatList = ({ user }) => {
       <FlatList
         data={!!data ? data.getChats : []}
         style={{ marginTop: 10 }}
-        renderItem={({ item }) => (
-          <ListItem
-            title={item?.name}
-            subTitle={`${item?.friends.length - 1} ${
-              item?.friends.length - 1 === 1 ? "Member" : "Members"
-            }`}
-            image={item.picture}
-            isGroupChat={item?.friends.length > 2}
-            //timeStamp={moment(item?.lastMessage?.createdAt).format("HH:mm")}
-            onPress={() => Actions.chatroom({ chat: item, loggedinUser: user })}
-          />
-        )}
+        renderItem={({ item }) => {
+          console.log(item);
+          return (
+            <ListItem
+              title={item?.name}
+              subTitle={`${item?.friends.length - 1} ${
+                item?.friends.length - 1 === 1 ? "Member" : "Members"
+              }`}
+              image={item.picture}
+              isGroupChat={item?.friends.length > 2}
+              //timeStamp={moment(item?.lastMessage?.createdAt).format("HH:mm")}
+              onPress={() =>
+                Actions.chatroom({ chat: item, loggedinUser: user })
+              }
+            />
+          );
+        }}
         keyExtractor={item => item.id}
       />
     </View>

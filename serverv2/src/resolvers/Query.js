@@ -1,7 +1,6 @@
 export default {
   async getMessages(parent, query, { prisma, pubsub }, info) {
     const { id } = query;
-    //console.log("IDD", id);
     const res = await prisma.query.messages(
       {
         where: {
@@ -17,7 +16,6 @@ export default {
   },
   async getChats(parent, query, { prisma, pubsub }, info) {
     const { chatIds } = query;
-    //console.log("CHATIDS", chatIds);
     return await prisma.query.chats(
       {
         where: {
@@ -28,7 +26,6 @@ export default {
     );
   },
   async getUsers(parent, query, { prisma }, info) {
-    //console.log("QUER", query);
     return await prisma.query.users(null, info);
   }
 };

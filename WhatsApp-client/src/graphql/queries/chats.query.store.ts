@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export default gql`
-  mutation addchat($chatName: String!, $userIds: [ID]!) {
-    addChat(chatName: $chatName, userIds: $userIds) {
+  query GetChats() {
+    getChats(chatIds: $chatIds) {
       id
       name
       friends {

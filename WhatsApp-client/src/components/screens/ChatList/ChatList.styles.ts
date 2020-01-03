@@ -3,7 +3,8 @@ import { getStatusBarHeight } from "react-native-safe-area-view";
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginTop: getStatusBarHeight()
+    marginTop: getStatusBarHeight(),
+    flex: 1
   },
   navRightContent: {
     flexDirection: "row",

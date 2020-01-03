@@ -6,9 +6,7 @@ import jwt from "jsonwebtoken";
 
 export default {
   async addMessage(parent, query, { prisma, pubsub }, info) {
-    //console.log("query one", query);
     const { id, message, senderId } = query;
-    //console.log("query senderId", senderId);
 
     const result = await prisma.mutation.createMessage(
       {
@@ -46,8 +44,6 @@ export default {
       },
       "{id, email, chats {id}}"
     );
-
-    //console.log(user);
 
     const token = jwt.sign({ userId: user.id }, APP_SECRET);
 

@@ -13,17 +13,17 @@ import { Actions } from "react-native-router-flux";
 import { Card, Item, Input, Label, Button, Icon } from "native-base";
 import getUsersQuery from "../../graphql/queries/users.query";
 import createChatMutation from "../../graphql/mutations/createChat.mutation";
+import getChatsQuery from "../../graphql/queries/chats.query";
 
 import NavBar from "../headers/TopNavBar";
 
-const CreateChat = () => {
-  const { data, loading, error } = useQuery(getUsersQuery);
-  const [createChat, { data: createChatData }] = useMutation(
-    createChatMutation
-  );
+const CreateChat = ({ chatIds }) => {
+  const { data: allUsers, loading, error } = useQuery(getUsersQuery);
+  const [createChat, data] = useMutation(createChatMutation);
+
   const [users, setUsers] = useState([]);
   const [chatName, setChatName] = useState("");
-  const { getUsers } = data || {};
+  const { getUsers } = allUsers || {};
 
   useEffect(() => {
     if (!!getUsers) {
@@ -33,7 +33,7 @@ const CreateChat = () => {
       });
       setUsers(newUsersList);
     }
-  }, [data]);
+  }, [allUsers]);
 
   //console.log("DATA in Create chat room", data, error);
 
@@ -41,9 +41,10 @@ const CreateChat = () => {
     return <View></View>;
   }
 
-  const createChatFunction = () => {
+  const createChatFunction = async () => {
     console.log("name", chatName);
     console.log("selected", users);
+
     const userIds = [];
     users.forEach(user => {
       if (!!user?.selected) {
@@ -51,12 +52,53 @@ const CreateChat = () => {
       }
     });
 
-    createChat({
+    console.log("USERIDS: ", userIds);
+
+    await createChat({
       variables: {
         chatName,
-        userIds
+        userIds: ["ck4j374ho00fy0737binvd00f"]
+      },
+      optimisticResponse: {
+        __typename: "Mutation",
+        addChat: {
+          __typename: "Chat",
+          id: "dummyId",
+          name: chatName,
+          friends: [
+            {
+              __typename: "User",
+              id: "useDummyId"
+            }
+          ]
+        }
+      },
+      update: (cache, { data: { addChat } }) => {
+        console.log("ADD CHAT DATA:  ", addChat);
+        const cachedData = cache.readQuery({
+          query: getChatsQuery,
+          variables: {
+            chatIds
+          }
+        });
+        console.log("cachedData", cachedData);
+        const newData = [...cachedData?.getChats, addChat];
+
+        try {
+          cache.writeQuery({
+            query: getChatsQuery,
+            variables: { chatIds },
+            data: {
+              ...cachedData,
+              getChats: newData
+            }
+          });
+        } catch (e) {
+          console.log(e);
+        }
       }
     });
+    //Actions.pop();
   };
 
   const selectChat = user => {
@@ -114,6 +156,7 @@ const CreateChat = () => {
         </View>
         <FlatList
           style={{ marginTop: 20 }}
+          keyExtractor={item => item.id}
           data={users}
           renderItem={({ item }) => (
             <TouchableWithoutFeedback onPress={() => selectChat(item)}>
@@ -121,19 +164,18 @@ const CreateChat = () => {
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
-                  height: 70,
-                  backgroundColor: "yellow"
+                  height: 70
                 }}
               >
-                <View style={{ width: 50, backgroundColor: "purple" }}>
+                <View style={{ width: 50 }}>
                   <MaterialIcons
                     name={
                       item.selected ? "check-box" : "check-box-outline-blank"
                     }
-                    size={24}
+                    size={30}
                   />
                 </View>
-                <Text>{item.email}</Text>
+                <Text style={{ fontSize: 20 }}>{item.email}</Text>
               </View>
             </TouchableWithoutFeedback>
           )}
