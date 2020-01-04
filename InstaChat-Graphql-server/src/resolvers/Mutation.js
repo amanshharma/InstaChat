@@ -59,6 +59,7 @@ export default {
     userIds.forEach(id => {
       connect.push({ id });
     });
+    //console.log("cccon", connect);
     return await prisma.mutation.createChat(
       {
         data: {

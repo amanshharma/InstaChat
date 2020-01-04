@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, FlatList } from "react-native";
+import moment from "moment";
 
 const MessageList = ({ messages = [], loggedinUser }) => {
   return (
@@ -13,10 +14,35 @@ const MessageList = ({ messages = [], loggedinUser }) => {
       renderItem={({ item }) => {
         const isOwner = item.user.id === loggedinUser.id;
         return (
+          <View
+            style={{
+              backgroundColor: isOwner ? "#DCF8C6" : "#ffffff",
+              flex: 1,
+              alignSelf: isOwner ? "flex-end" : "flex-start",
+              borderRadius: 8,
+              paddingHorizontal: 10,
+              paddingBottom: 2,
+              paddingTop: isOwner ? 10 : 2
+            }}
+          >
+            {!isOwner && (
+              <Text style={{ color: "purple", fontWeight: "bold" }}>
+                {item.user.email}
+              </Text>
+            )}
+            <Text>{item.message}</Text>
+            <Text style={{ fontSize: 10, opacity: 0.6, alignSelf: "flex-end" }}>
+              {moment(item?.createdAt).format("hh:mm a")}
+            </Text>
+          </View>
+        );
+
+        return (
           <View style={{ flex: 1 }}>
             <Text
               style={{
-                paddingVertical: 10,
+                paddingTop: isOwner ? 10 : 2,
+                paddingBottom: 10,
                 backgroundColor: isOwner ? "#DCF8C6" : "#ffffff",
                 flexShrink: 1,
                 alignSelf: isOwner ? "flex-end" : "flex-start",
@@ -24,7 +50,17 @@ const MessageList = ({ messages = [], loggedinUser }) => {
                 borderRadius: 8
               }}
             >
-              {item.message} {"        "}---from-- {item.user.email}
+              {!isOwner && (
+                <Text style={{ color: "purple", fontWeight: "bold" }}>
+                  {item.user.email}
+                </Text>
+              )}
+              {!isOwner && "\n"}
+              {item.message}
+              {"\n"}
+              <Text style={{ fontSize: 10, opacity: 0.6, textAlign: "right" }}>
+                {moment(item?.createdAt).format("hh:mm a")}
+              </Text>
             </Text>
           </View>
         );

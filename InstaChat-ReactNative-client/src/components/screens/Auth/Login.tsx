@@ -16,6 +16,7 @@ const Login = () => {
   const [username, setUsername] = useState("user");
   const [password, setPassword] = useState("root");
   const [login, data] = useMutation(loginMutation);
+  const [showSignup, setShowSignup] = useState(false);
 
   const loginFunction = async () => {
     await login({
@@ -74,12 +75,26 @@ const Login = () => {
         </View>
         <Card
           style={{
-            padding: 15,
+            paddingHorizontal: 15,
+            paddingBottom: 15,
             width: "90%",
             alignSelf: "center",
             backgroundColor: "#f7f4f0"
           }}
         >
+          <View style={{ height: 30, marginTop: 5 }}>
+            {!!showSignup && (
+              <TouchableOpacity
+                hitSlop={{ top: 10, bottom: 10, right: 10, left: 10 }}
+                style={{ alignSelf: "flex-end" }}
+                onPress={() => setShowSignup(false)}
+              >
+                <Text style={{ textAlign: "right", opacity: 0.8 }}>
+                  Back To Login
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
           <Item>
             <Icon active name="user" type="AntDesign" />
             <Input
@@ -109,7 +124,9 @@ const Login = () => {
             }}
             onPress={loginFunction}
           >
-            <Text style={{ color: "white" }}>LOGIN</Text>
+            <Text style={{ color: "white" }}>
+              {!!showSignup ? "SIGNUP" : "LOGIN"}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             hitSlop={{ top: 10, bottom: 10, right: 10, left: 10 }}
@@ -121,6 +138,9 @@ const Login = () => {
           <TouchableOpacity
             hitSlop={{ top: 10, bottom: 10, right: 10, left: 10 }}
             style={{ flexDirection: "row", marginTop: 20, alignSelf: "center" }}
+            onPress={() => {
+              setShowSignup(true);
+            }}
           >
             <Text>Don't have an Account? </Text>
             <Text style={{ color: "#428bca" }}>SignUp</Text>

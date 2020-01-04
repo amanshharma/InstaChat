@@ -17,11 +17,12 @@ import getChatsQuery from "../../graphql/queries/chats.query";
 
 import NavBar from "../headers/TopNavBar";
 
-const CreateChat = ({ chatIds }) => {
+const CreateChat = ({ chatIds, loggedinUser }) => {
   const { data: allUsers, loading, error } = useQuery(getUsersQuery);
   const [createChat, data] = useMutation(createChatMutation);
 
   const [users, setUsers] = useState([]);
+  const [valid, setValid] = useState(true);
   const [chatName, setChatName] = useState("");
   const { getUsers } = allUsers || {};
 
@@ -29,7 +30,8 @@ const CreateChat = ({ chatIds }) => {
     if (!!getUsers) {
       const newUsersList = [];
       getUsers.forEach(user => {
-        newUsersList.push({ ...user, selected: false });
+        if (user.id !== loggedinUser.id)
+          newUsersList.push({ ...user, selected: false });
       });
       setUsers(newUsersList);
     }
@@ -45,7 +47,7 @@ const CreateChat = ({ chatIds }) => {
     console.log("name", chatName);
     console.log("selected", users);
 
-    const userIds = [];
+    const userIds = [loggedinUser.id];
     users.forEach(user => {
       if (!!user?.selected) {
         userIds.push(user.id);
@@ -54,10 +56,17 @@ const CreateChat = ({ chatIds }) => {
 
     console.log("USERIDS: ", userIds);
 
+    if (userIds.length < 2 || chatName.trim() === "") {
+      setValid(false);
+      return;
+    } else {
+      setValid(true);
+    }
+
     await createChat({
       variables: {
         chatName,
-        userIds: ["ck4j374ho00fy0737binvd00f"]
+        userIds
       },
       optimisticResponse: {
         __typename: "Mutation",
@@ -132,8 +141,21 @@ const CreateChat = ({ chatIds }) => {
         )}
       />
 
-      <View style={{ marginHorizontal: 20, marginVertical: 40 }}>
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+      <View style={{ marginHorizontal: 20, marginVertical: 10 }}>
+        <View style={{ height: 30 }}>
+          <Text style={{ color: "red" }}>
+            {valid
+              ? ""
+              : "Error: Please enter a Group Name and select at least one User"}
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginTop: 20
+          }}
+        >
           <Item style={{ flexGrow: 1 }}>
             <Label>Name</Label>
             <Input

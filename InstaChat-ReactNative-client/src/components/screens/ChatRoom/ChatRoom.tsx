@@ -108,7 +108,8 @@ const ChatRoom = ({
             __typename: "User",
             id: loggedinUser?.id,
             email: loggedinUser?.email
-          }
+          },
+          createdAt: new Date()
         }
       },
       update: (cache, { data: { addMessage } }) => {

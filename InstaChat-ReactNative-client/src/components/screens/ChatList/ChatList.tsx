@@ -80,7 +80,7 @@ const ChatList = ({ user }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={{ borderWidth: 2, borderColor: "#2c6157", borderRadius: 20 }}
-          onPress={() => Actions.createChat({ chatIds })}
+          onPress={() => Actions.createChat({ chatIds, loggedinUser: user })}
         >
           <Text style={{ padding: 10 }}>Create New Chat</Text>
         </TouchableOpacity>
