@@ -32,9 +32,9 @@ InstaChat is WhatsApp like chat application built with React Native, TypeScript,
 :black_square_button: Delete a message in chat room
 
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/29627276/71787737-7da3e580-2fe9-11ea-892c-01d8afcaa2fd.jpg" width="250" height="600" />
-  <img src="https://user-images.githubusercontent.com/29627276/71787736-7da3e580-2fe9-11ea-9ae3-e3f933f1b38a.jpg" width="250" height="600" />
-<img src="https://user-images.githubusercontent.com/29627276/71787735-7da3e580-2fe9-11ea-87c5-a59e68938213.jpg" width="250" height="600" />
-<img src="https://user-images.githubusercontent.com/29627276/71787738-7da3e580-2fe9-11ea-8223-de8e983121ba.jpg" width="250" height="600" />
+  <img src="https://user-images.githubusercontent.com/29627276/71787737-7da3e580-2fe9-11ea-892c-01d8afcaa2fd.jpg" width="210" height="500" />
+  <img src="https://user-images.githubusercontent.com/29627276/71787736-7da3e580-2fe9-11ea-9ae3-e3f933f1b38a.jpg" width="210" height="500" />
+<img src="https://user-images.githubusercontent.com/29627276/71787735-7da3e580-2fe9-11ea-87c5-a59e68938213.jpg" width="210" height="500" />
+<img src="https://user-images.githubusercontent.com/29627276/71787738-7da3e580-2fe9-11ea-8223-de8e983121ba.jpg" width="210" height="500" />
   </p>
 
