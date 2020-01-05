@@ -55,13 +55,11 @@ export default {
     };
   },
   async addChat(parent, query, { prisma, pubsub }, info) {
-    //("chats data", query);
     const { chatName, userIds } = query;
     const connect = [];
     userIds.forEach(id => {
       connect.push({ id });
     });
-    //console.log("cccon", connect);
     return await prisma.mutation.createChat(
       {
         data: {
@@ -75,10 +73,8 @@ export default {
     );
   },
   async register(parent, query, { prisma }, info) {
-    console.log("registe query", query);
     const { email, password } = query;
     const userExists = await prisma.exists.User({ email });
-    console.log(userExists);
     if (userExists) throw new Error("Username Already Taken");
     return await prisma.mutation.createUser(
       {

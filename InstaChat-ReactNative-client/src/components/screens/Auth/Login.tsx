@@ -44,7 +44,6 @@ const Login = () => {
   };
 
   const signupFunction = async () => {
-    console.log("ll", username, password);
     await register({
       variables: {
         email: username,
@@ -52,13 +51,11 @@ const Login = () => {
       }
     })
       .then(({ data }) => {
-        console.log(data);
         setShowError(false);
         const { id } = data?.register;
         if (!!id) setShowSuccess(true);
       })
       .catch(err => {
-        console.log("Error:", err);
         setShowSuccess(false);
         if (!!err) setShowError(true);
       });

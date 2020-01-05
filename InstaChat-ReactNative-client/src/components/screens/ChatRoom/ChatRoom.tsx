@@ -79,7 +79,7 @@ const ChatRoom = ({
             }
           });
         } catch (e) {
-          console.log("error output: ", e);
+          console.log("Error", e);
         }
       }
     }
@@ -131,7 +131,7 @@ const ChatRoom = ({
             }
           });
         } catch (e) {
-          console.log("error output: ", e);
+          console.log("Error ", e);
         }
 
         const data1 = cache.readQuery({
@@ -139,7 +139,7 @@ const ChatRoom = ({
           variables: { id: chatId }
         });
       }
-    }).then(res => console.log(res));
+    });
   };
 
   return (

@@ -43,17 +43,12 @@ const CreateChat = ({ chatIds, loggedinUser }) => {
   }
 
   const createChatFunction = async () => {
-    console.log("name", chatName);
-    console.log("selected", users);
-
     const userIds = [loggedinUser.id];
     users.forEach(user => {
       if (!!user?.selected) {
         userIds.push(user.id);
       }
     });
-
-    console.log("USERIDS: ", userIds);
 
     if (userIds.length < 2 || chatName.trim() === "") {
       setValid(false);
@@ -82,14 +77,12 @@ const CreateChat = ({ chatIds, loggedinUser }) => {
         }
       },
       update: (cache, { data: { addChat } }) => {
-        console.log("ADD CHAT DATA:  ", addChat);
         const cachedData = cache.readQuery({
           query: getChatsQuery,
           variables: {
             chatIds
           }
         });
-        console.log("cachedData", cachedData);
         const newData = [...cachedData?.getChats, addChat];
 
         try {
@@ -102,11 +95,10 @@ const CreateChat = ({ chatIds, loggedinUser }) => {
             }
           });
         } catch (e) {
-          console.log(e);
+          console.log("Error: ", e);
         }
       }
     });
-    //Actions.pop();
   };
 
   const selectChat = user => {
