@@ -1,4 +1,4 @@
-# :star: InstaChat :speech_baloon:
+# :star: InstaChat :speech_balloon:
 
 
 # This is a tryout repository and may contain consoles and test code (uncleaned).  
