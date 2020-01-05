@@ -34,6 +34,8 @@ const Login = () => {
       .catch(e => console.log("Error", e));
   };
 
+  const signupFunction = () => {};
+
   return (
     <KeyboardAvoidingView>
       <ImageBackground
@@ -122,7 +124,7 @@ const Login = () => {
               marginTop: 18,
               borderRadius: 5
             }}
-            onPress={loginFunction}
+            onPress={showSignup ? signupFunction : loginFunction}
           >
             <Text style={{ color: "white" }}>
               {!!showSignup ? "SIGNUP" : "LOGIN"}
