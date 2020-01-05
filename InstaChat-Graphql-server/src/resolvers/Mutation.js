@@ -36,6 +36,8 @@ export default {
   },
   async login(parent, query, { prisma, pubsub }, info) {
     const { username, password } = query;
+    const userExists = await prisma.exists.User({ email: username, password });
+    if (!userExists) throw new Error("Incorrect Username or Password");
     const user = await prisma.query.user(
       {
         where: {
