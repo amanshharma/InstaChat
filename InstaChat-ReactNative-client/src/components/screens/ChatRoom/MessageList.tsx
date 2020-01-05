@@ -36,34 +36,6 @@ const MessageList = ({ messages = [], loggedinUser }) => {
             </Text>
           </View>
         );
-
-        return (
-          <View style={{ flex: 1 }}>
-            <Text
-              style={{
-                paddingTop: isOwner ? 10 : 2,
-                paddingBottom: 10,
-                backgroundColor: isOwner ? "#DCF8C6" : "#ffffff",
-                flexShrink: 1,
-                alignSelf: isOwner ? "flex-end" : "flex-start",
-                paddingHorizontal: 10,
-                borderRadius: 8
-              }}
-            >
-              {!isOwner && (
-                <Text style={{ color: "purple", fontWeight: "bold" }}>
-                  {item.user.email}
-                </Text>
-              )}
-              {!isOwner && "\n"}
-              {item.message}
-              {"\n"}
-              <Text style={{ fontSize: 10, opacity: 0.6, textAlign: "right" }}>
-                {moment(item?.createdAt).format("hh:mm a")}
-              </Text>
-            </Text>
-          </View>
-        );
       }}
       //style={{ marginBottom: 56 }}
       contentContainerStyle={{
