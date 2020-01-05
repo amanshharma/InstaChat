@@ -2,7 +2,7 @@
 
 InstaChat is WhatsApp like chat application built with React Native, TypeScript, GraphQL, Prisma and PostgreSQL.
 
-#### This project is currently in dev process...please stay tuned for updates.
+#### This project is currently in dev process...Below is the list of features completed and ToDos, please stay tuned for updates. Also, see the demo pictures to get an idea.
 
 ### Features Completed:
 :white_check_mark: Login
