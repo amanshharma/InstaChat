@@ -4,7 +4,7 @@ InstaChat is WhatsApp like chat application built with React Native, TypeScript,
 
 #### This project is currently in dev process...Below is the list of features completed and ToDos, please stay tuned for updates. Also, see the demo pictures to get an idea.
 
-### Features Completed:
+### :point_right: Features Completed:
 :white_check_mark: Login
 
 :white_check_mark: SignUp
@@ -19,7 +19,7 @@ InstaChat is WhatsApp like chat application built with React Native, TypeScript,
 
 :white_check_mark: Display text message time in Chat Room
 
-### Features in Development (Coming soon...)
+### :point_right: Features in Development (Coming soon...)
 
 :black_square_button: Forgot Password
 
@@ -31,7 +31,7 @@ InstaChat is WhatsApp like chat application built with React Native, TypeScript,
 
 :black_square_button: Delete a message in chat room
 
-## Demo
+## :point_right: Demo
 
 <p float="left">
   <img src="https://user-images.githubusercontent.com/29627276/71787737-7da3e580-2fe9-11ea-892c-01d8afcaa2fd.jpg" width="285" height="500" />
