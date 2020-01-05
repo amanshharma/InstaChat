@@ -16,6 +16,7 @@ import createChatMutation from "../../graphql/mutations/createChat.mutation";
 import getChatsQuery from "../../graphql/queries/chats.query";
 
 import NavBar from "../headers/TopNavBar";
+import styles from "./CreateChat.styles";
 
 const CreateChat = ({ chatIds, loggedinUser }) => {
   const { data: allUsers, loading, error } = useQuery(getUsersQuery);
@@ -36,8 +37,6 @@ const CreateChat = ({ chatIds, loggedinUser }) => {
       setUsers(newUsersList);
     }
   }, [allUsers]);
-
-  //console.log("DATA in Create chat room", data, error);
 
   if (!getUsers) {
     return <View></View>;
@@ -127,36 +126,30 @@ const CreateChat = ({ chatIds, loggedinUser }) => {
     <SafeAreaView forceInset={{ top: "always" }}>
       <NavBar
         renderLeft={() => (
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={styles.titleContainer}>
             <TouchableOpacity onPress={() => Actions.pop()}>
               <AntDesign
                 name="arrowleft"
                 size={24}
-                style={{ padding: 10 }}
+                style={styles.arrowLeft}
                 color="white"
               />
             </TouchableOpacity>
-            <Text style={{ color: "white" }}>Create A New Chat</Text>
+            <Text style={styles.titleText}>Create A New Chat</Text>
           </View>
         )}
       />
 
-      <View style={{ marginHorizontal: 20, marginVertical: 10 }}>
-        <View style={{ height: 30 }}>
-          <Text style={{ color: "red" }}>
+      <View style={styles.container}>
+        <View style={styles.messageContainer}>
+          <Text style={styles.messageText}>
             {valid
               ? ""
               : "Error: Please enter a Group Name and select at least one User"}
           </Text>
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginTop: 20
-          }}
-        >
-          <Item style={{ flexGrow: 1 }}>
+        <View style={styles.inputAndButtonContainer}>
+          <Item style={styles.textInput}>
             <Label>Name</Label>
             <Input
               placeholder="Chat Group Name"
@@ -165,31 +158,20 @@ const CreateChat = ({ chatIds, loggedinUser }) => {
             />
           </Item>
           <TouchableOpacity
-            style={{
-              borderWidth: 2,
-              borderColor: "#2c6157",
-              borderRadius: 20,
-              marginLeft: 8
-            }}
+            style={styles.createButtonContainer}
             onPress={createChatFunction}
           >
-            <Text style={{ padding: 10 }}>Create</Text>
+            <Text style={styles.createButtonText}>Create</Text>
           </TouchableOpacity>
         </View>
         <FlatList
-          style={{ marginTop: 20 }}
+          style={styles.listStyle}
           keyExtractor={item => item.id}
           data={users}
           renderItem={({ item }) => (
             <TouchableWithoutFeedback onPress={() => selectChat(item)}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  height: 70
-                }}
-              >
-                <View style={{ width: 50 }}>
+              <View style={styles.listItemContainer}>
+                <View style={styles.checboxIcon}>
                   <MaterialIcons
                     name={
                       item.selected ? "check-box" : "check-box-outline-blank"
@@ -197,7 +179,7 @@ const CreateChat = ({ chatIds, loggedinUser }) => {
                     size={30}
                   />
                 </View>
-                <Text style={{ fontSize: 20 }}>{item.email}</Text>
+                <Text style={styles.usernameText}>{item.email}</Text>
               </View>
             </TouchableWithoutFeedback>
           )}

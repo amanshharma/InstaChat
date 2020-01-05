@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, FlatList } from "react-native";
 import moment from "moment";
+import styles from "./MessageList.styles";
 
 const MessageList = ({ messages = [], loggedinUser }) => {
   return (
@@ -8,42 +9,29 @@ const MessageList = ({ messages = [], loggedinUser }) => {
       data={messages}
       inverted
       keyExtractor={(item, index) => item.id}
-      ItemSeparatorComponent={() => (
-        <View style={{ height: 6, width: "100%" }}></View>
-      )}
+      ItemSeparatorComponent={() => <View style={styles.itemSeparater}></View>}
       renderItem={({ item }) => {
         const isOwner = item.user.id === loggedinUser.id;
         return (
           <View
-            style={{
-              backgroundColor: isOwner ? "#DCF8C6" : "#ffffff",
-              flex: 1,
-              alignSelf: isOwner ? "flex-end" : "flex-start",
-              borderRadius: 8,
-              paddingHorizontal: 10,
-              paddingBottom: 2,
-              paddingTop: isOwner ? 10 : 2
-            }}
+            style={[
+              {
+                backgroundColor: isOwner ? "#DCF8C6" : "#ffffff",
+                alignSelf: isOwner ? "flex-end" : "flex-start",
+                paddingTop: isOwner ? 10 : 2
+              },
+              styles.messageContainer
+            ]}
           >
-            {!isOwner && (
-              <Text style={{ color: "purple", fontWeight: "bold" }}>
-                {item.user.email}
-              </Text>
-            )}
+            {!isOwner && <Text style={styles.username}>{item.user.email}</Text>}
             <Text>{item.message}</Text>
-            <Text style={{ fontSize: 10, opacity: 0.6, alignSelf: "flex-end" }}>
+            <Text style={styles.time}>
               {moment(item?.createdAt).format("hh:mm a")}
             </Text>
           </View>
         );
       }}
-      //style={{ marginBottom: 56 }}
-      contentContainerStyle={{
-        //backgroundColor: "green",
-        paddingTop: 71,
-        paddingBottom: 20,
-        paddingHorizontal: 10
-      }}
+      contentContainerStyle={styles.listContentContainerStyle}
     />
   );
 };
