@@ -1,15 +1,14 @@
 import React, { useMemo, useEffect, useState } from "react";
 import { View, FlatList, Text, TouchableOpacity } from "react-native";
-import gql from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import moment from "moment";
 import { Actions } from "react-native-router-flux";
 import ListItem from "../../commons/ListItem";
 import TopNavBar from "../../headers/TopNavBar";
-import styles from "./ChatList.styles";
 import { Ionicons, Entypo, AntDesign } from "@expo/vector-icons";
 import getChatsQuery from "../../../graphql/queries/chats.query";
 import createChatMutation from "../../../graphql/mutations/createChat.mutation";
+
+import styles from "./ChatList.styles";
 
 const ChatList = ({ user }) => {
   const chatIds = [];
@@ -30,18 +29,16 @@ const ChatList = ({ user }) => {
       </View>
     );
 
-  console.log("DDATTA", data);
-
   return (
     <View style={styles.wrapper}>
       <TopNavBar
         renderLeft={() => (
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={styles.logoContainer}>
             <TouchableOpacity onPress={() => Actions.pop()}>
               <AntDesign
                 name="arrowleft"
                 size={24}
-                style={{ paddingRight: 8 }}
+                style={styles.arrowLeft}
                 color="white"
               />
             </TouchableOpacity>
@@ -50,9 +47,7 @@ const ChatList = ({ user }) => {
         )}
         renderRight={() => (
           <View style={styles.navRightContent}>
-            <Text style={{ color: "#ffffff", marginRight: 8, fontSize: 18 }}>
-              {user?.email}
-            </Text>
+            <Text style={styles.loggedUsernameText}>{user?.email}</Text>
             <Ionicons
               name="md-search"
               size={24}
@@ -68,28 +63,21 @@ const ChatList = ({ user }) => {
           </View>
         )}
       />
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          padding: 10
-        }}
-      >
-        <TouchableOpacity style={{}}>
-          <Text style={{ padding: 10 }}>All Chats</Text>
+      <View style={styles.topBarContainer}>
+        <TouchableOpacity>
+          <Text style={styles.headerText}>All Chats</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{ borderWidth: 2, borderColor: "#2c6157", borderRadius: 20 }}
+          style={styles.createChatButtonContainer}
           onPress={() => Actions.createChat({ chatIds, loggedinUser: user })}
         >
-          <Text style={{ padding: 10 }}>Create New Chat</Text>
+          <Text style={styles.headerText}>Create New Chat</Text>
         </TouchableOpacity>
       </View>
       <FlatList
         data={!!data ? data.getChats : []}
-        style={{ marginTop: 10 }}
+        style={styles.chatListStyle}
         renderItem={({ item }) => {
-          console.log(item);
           return (
             <ListItem
               title={item?.name}
@@ -98,7 +86,6 @@ const ChatList = ({ user }) => {
               }`}
               image={item.picture}
               isGroupChat={item?.friends.length > 2}
-              //timeStamp={moment(item?.lastMessage?.createdAt).format("HH:mm")}
               onPress={() =>
                 Actions.chatroom({ chat: item, loggedinUser: user })
               }

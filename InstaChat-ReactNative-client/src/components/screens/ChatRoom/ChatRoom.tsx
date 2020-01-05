@@ -146,7 +146,7 @@ const ChatRoom = ({
     <KeyboardAvoidingView behavior="padding">
       <ImageBackground
         source={require("../../../../assets/chat-bg.jpg")}
-        style={{ width: "100%", height: "100%" }}
+        style={styles.backgroundImage}
       >
         <View style={styles.wrapper}>
           <TopNavBar
@@ -160,9 +160,6 @@ const ChatRoom = ({
                     color="white"
                   />
                 </TouchableOpacity>
-                {/* <View style={styles.image}>
-                  <Image source={{ uri: undefined }} style={styles.thumbnail} />
-                </View> */}
                 <View style={styles.navTitleContainer}>
                   <TouchableOpacity>
                     <Text style={styles.navTitle}>{chatRoomName}</Text>
