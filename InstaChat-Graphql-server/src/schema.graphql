@@ -10,7 +10,7 @@ type Mutation {
   addMessage(id: ID!, message: String!, senderId: ID!): Message!
   login(username: String!, password: String!): AuthenticationPayload!
   addChat(chatName: String!, userIds: [ID]!): Chat
-  #register(email: String!, password: String!): User
+  register(email: String!, password: String!): User
 }
 
 type Subscription {
