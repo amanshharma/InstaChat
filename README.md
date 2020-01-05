@@ -32,6 +32,7 @@ InstaChat is WhatsApp like chat application built with React Native, TypeScript,
 :black_square_button: Delete a message in chat room
 
 ![Screenshot_20200105-182304_Expo](https://user-images.githubusercontent.com/29627276/71787735-7da3e580-2fe9-11ea-87c5-a59e68938213.jpg | width=100)
+<img src="https://user-images.githubusercontent.com/29627276/71787735-7da3e580-2fe9-11ea-87c5-a59e68938213.jpg" width="200" height="400" />
 ![Screenshot_20200105-182316_Expo](https://user-images.githubusercontent.com/29627276/71787736-7da3e580-2fe9-11ea-9ae3-e3f933f1b38a.jpg)
 ![Screenshot_20200105-180851_Expo](https://user-images.githubusercontent.com/29627276/71787737-7da3e580-2fe9-11ea-892c-01d8afcaa2fd.jpg)
 ![Screenshot_20200105-180930_Expo](https://user-images.githubusercontent.com/29627276/71787738-7da3e580-2fe9-11ea-8223-de8e983121ba.jpg)
