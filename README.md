@@ -22,3 +22,11 @@ InstaChat is WhatsApp like chat application built with React Native, TypeScript,
 ### Features in Development (Coming soon...)
 
 :black_square_button: Forgot Password
+
+:black_square_button: Display Last Message and user profile in the chat list page (Just like Whatsapp)
+
+:black_square_button: Add a group profile picture
+
+:black_square_button: Search chat group and user
+
+:black_square_button: Delete a message in chat room
