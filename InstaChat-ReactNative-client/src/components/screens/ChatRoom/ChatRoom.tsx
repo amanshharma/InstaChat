@@ -67,6 +67,8 @@ const ChatRoom = ({
         item => item.id === dataFromSubscription.message.id
       );
 
+      console.log("dataFromSubscription.message", dataFromSubscription.message);
+
       const newData = [dataFromSubscription.message, ...cachedData.getMessages];
       if (!isMessagePresent) {
         try {
