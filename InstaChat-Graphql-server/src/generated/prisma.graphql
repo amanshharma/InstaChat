@@ -1,4 +1,4 @@
-# source: http://192.168.99.100:4466
+# source: http://<IP ADDRESS>:4466
 # timestamp: Fri Dec 27 2019 12:53:55 GMT-0500 (Eastern Standard Time)
 
 type AggregateChat {
@@ -14,23 +14,47 @@ type AggregateUser {
 }
 
 type BatchPayload {
-  """The number of nodes that have been affected by the Batch operation."""
+  """
+  The number of nodes that have been affected by the Batch operation.
+  """
   count: Long!
 }
 
 type Chat implements Node {
   id: ID!
   name: String
-  messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message!]
-  friends(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  messages(
+    where: MessageWhereInput
+    orderBy: MessageOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Message!]
+  friends(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [User!]
 }
 
-"""A connection to a list of items."""
+"""
+A connection to a list of items.
+"""
 type ChatConnection {
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """A list of edges."""
+  """
+  A list of edges.
+  """
   edges: [ChatEdge]!
   aggregate: AggregateChat!
 }
@@ -64,12 +88,18 @@ input ChatCreateWithoutMessagesInput {
   friends: UserCreateManyWithoutChatsInput
 }
 
-"""An edge in a connection."""
+"""
+An edge in a connection.
+"""
 type ChatEdge {
-  """The item at the end of the edge."""
+  """
+  The item at the end of the edge.
+  """
   node: Chat!
 
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: String!
 }
 
@@ -86,93 +116,151 @@ type ChatPreviousValues {
 }
 
 input ChatScalarWhereInput {
-  """Logical AND on all given filters."""
+  """
+  Logical AND on all given filters.
+  """
   AND: [ChatScalarWhereInput!]
 
-  """Logical OR on all given filters."""
+  """
+  Logical OR on all given filters.
+  """
   OR: [ChatScalarWhereInput!]
 
-  """Logical NOT on all given filters combined by AND."""
+  """
+  Logical NOT on all given filters combined by AND.
+  """
   NOT: [ChatScalarWhereInput!]
   id: ID
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   id_not: ID
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   id_in: [ID!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   id_not_in: [ID!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   id_lt: ID
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   id_lte: ID
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   id_gt: ID
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   id_gte: ID
 
-  """All values containing the given string."""
+  """
+  All values containing the given string.
+  """
   id_contains: ID
 
-  """All values not containing the given string."""
+  """
+  All values not containing the given string.
+  """
   id_not_contains: ID
 
-  """All values starting with the given string."""
+  """
+  All values starting with the given string.
+  """
   id_starts_with: ID
 
-  """All values not starting with the given string."""
+  """
+  All values not starting with the given string.
+  """
   id_not_starts_with: ID
 
-  """All values ending with the given string."""
+  """
+  All values ending with the given string.
+  """
   id_ends_with: ID
 
-  """All values not ending with the given string."""
+  """
+  All values not ending with the given string.
+  """
   id_not_ends_with: ID
   name: String
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   name_not: String
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   name_in: [String!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   name_not_in: [String!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   name_lt: String
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   name_lte: String
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   name_gt: String
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   name_gte: String
 
-  """All values containing the given string."""
+  """
+  All values containing the given string.
+  """
   name_contains: String
 
-  """All values not containing the given string."""
+  """
+  All values not containing the given string.
+  """
   name_not_contains: String
 
-  """All values starting with the given string."""
+  """
+  All values starting with the given string.
+  """
   name_starts_with: String
 
-  """All values not starting with the given string."""
+  """
+  All values not starting with the given string.
+  """
   name_not_starts_with: String
 
-  """All values ending with the given string."""
+  """
+  All values ending with the given string.
+  """
   name_ends_with: String
 
-  """All values not ending with the given string."""
+  """
+  All values not ending with the given string.
+  """
   name_not_ends_with: String
 }
 
@@ -184,16 +272,24 @@ type ChatSubscriptionPayload {
 }
 
 input ChatSubscriptionWhereInput {
-  """Logical AND on all given filters."""
+  """
+  Logical AND on all given filters.
+  """
   AND: [ChatSubscriptionWhereInput!]
 
-  """Logical OR on all given filters."""
+  """
+  Logical OR on all given filters.
+  """
   OR: [ChatSubscriptionWhereInput!]
 
-  """Logical NOT on all given filters combined by AND."""
+  """
+  Logical NOT on all given filters combined by AND.
+  """
   NOT: [ChatSubscriptionWhereInput!]
 
-  """The subscription event gets dispatched when it's listed in mutation_in"""
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
   mutation_in: [MutationType!]
 
   """
@@ -280,93 +376,151 @@ input ChatUpsertWithWhereUniqueWithoutFriendsInput {
 }
 
 input ChatWhereInput {
-  """Logical AND on all given filters."""
+  """
+  Logical AND on all given filters.
+  """
   AND: [ChatWhereInput!]
 
-  """Logical OR on all given filters."""
+  """
+  Logical OR on all given filters.
+  """
   OR: [ChatWhereInput!]
 
-  """Logical NOT on all given filters combined by AND."""
+  """
+  Logical NOT on all given filters combined by AND.
+  """
   NOT: [ChatWhereInput!]
   id: ID
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   id_not: ID
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   id_in: [ID!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   id_not_in: [ID!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   id_lt: ID
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   id_lte: ID
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   id_gt: ID
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   id_gte: ID
 
-  """All values containing the given string."""
+  """
+  All values containing the given string.
+  """
   id_contains: ID
 
-  """All values not containing the given string."""
+  """
+  All values not containing the given string.
+  """
   id_not_contains: ID
 
-  """All values starting with the given string."""
+  """
+  All values starting with the given string.
+  """
   id_starts_with: ID
 
-  """All values not starting with the given string."""
+  """
+  All values not starting with the given string.
+  """
   id_not_starts_with: ID
 
-  """All values ending with the given string."""
+  """
+  All values ending with the given string.
+  """
   id_ends_with: ID
 
-  """All values not ending with the given string."""
+  """
+  All values not ending with the given string.
+  """
   id_not_ends_with: ID
   name: String
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   name_not: String
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   name_in: [String!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   name_not_in: [String!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   name_lt: String
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   name_lte: String
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   name_gt: String
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   name_gte: String
 
-  """All values containing the given string."""
+  """
+  All values containing the given string.
+  """
   name_contains: String
 
-  """All values not containing the given string."""
+  """
+  All values not containing the given string.
+  """
   name_not_contains: String
 
-  """All values starting with the given string."""
+  """
+  All values starting with the given string.
+  """
   name_starts_with: String
 
-  """All values not starting with the given string."""
+  """
+  All values not starting with the given string.
+  """
   name_not_starts_with: String
 
-  """All values ending with the given string."""
+  """
+  All values ending with the given string.
+  """
   name_ends_with: String
 
-  """All values not ending with the given string."""
+  """
+  All values not ending with the given string.
+  """
   name_not_ends_with: String
   messages_every: MessageWhereInput
   messages_some: MessageWhereInput
@@ -382,7 +536,9 @@ input ChatWhereUniqueInput {
 
 scalar DateTime
 
-"""Raw JSON value"""
+"""
+Raw JSON value
+"""
 scalar Json
 
 """
@@ -399,12 +555,18 @@ type Message implements Node {
   createdAt: DateTime!
 }
 
-"""A connection to a list of items."""
+"""
+A connection to a list of items.
+"""
 type MessageConnection {
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """A list of edges."""
+  """
+  A list of edges.
+  """
   edges: [MessageEdge]!
   aggregate: AggregateMessage!
 }
@@ -427,12 +589,18 @@ input MessageCreateWithoutChatInput {
   user: UserCreateOneInput
 }
 
-"""An edge in a connection."""
+"""
+An edge in a connection.
+"""
 type MessageEdge {
-  """The item at the end of the edge."""
+  """
+  The item at the end of the edge.
+  """
   node: Message!
 
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: String!
 }
 
@@ -452,115 +620,187 @@ type MessagePreviousValues {
 }
 
 input MessageScalarWhereInput {
-  """Logical AND on all given filters."""
+  """
+  Logical AND on all given filters.
+  """
   AND: [MessageScalarWhereInput!]
 
-  """Logical OR on all given filters."""
+  """
+  Logical OR on all given filters.
+  """
   OR: [MessageScalarWhereInput!]
 
-  """Logical NOT on all given filters combined by AND."""
+  """
+  Logical NOT on all given filters combined by AND.
+  """
   NOT: [MessageScalarWhereInput!]
   id: ID
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   id_not: ID
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   id_in: [ID!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   id_not_in: [ID!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   id_lt: ID
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   id_lte: ID
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   id_gt: ID
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   id_gte: ID
 
-  """All values containing the given string."""
+  """
+  All values containing the given string.
+  """
   id_contains: ID
 
-  """All values not containing the given string."""
+  """
+  All values not containing the given string.
+  """
   id_not_contains: ID
 
-  """All values starting with the given string."""
+  """
+  All values starting with the given string.
+  """
   id_starts_with: ID
 
-  """All values not starting with the given string."""
+  """
+  All values not starting with the given string.
+  """
   id_not_starts_with: ID
 
-  """All values ending with the given string."""
+  """
+  All values ending with the given string.
+  """
   id_ends_with: ID
 
-  """All values not ending with the given string."""
+  """
+  All values not ending with the given string.
+  """
   id_not_ends_with: ID
   message: String
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   message_not: String
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   message_in: [String!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   message_not_in: [String!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   message_lt: String
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   message_lte: String
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   message_gt: String
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   message_gte: String
 
-  """All values containing the given string."""
+  """
+  All values containing the given string.
+  """
   message_contains: String
 
-  """All values not containing the given string."""
+  """
+  All values not containing the given string.
+  """
   message_not_contains: String
 
-  """All values starting with the given string."""
+  """
+  All values starting with the given string.
+  """
   message_starts_with: String
 
-  """All values not starting with the given string."""
+  """
+  All values not starting with the given string.
+  """
   message_not_starts_with: String
 
-  """All values ending with the given string."""
+  """
+  All values ending with the given string.
+  """
   message_ends_with: String
 
-  """All values not ending with the given string."""
+  """
+  All values not ending with the given string.
+  """
   message_not_ends_with: String
   createdAt: DateTime
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   createdAt_not: DateTime
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   createdAt_in: [DateTime!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   createdAt_not_in: [DateTime!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   createdAt_lt: DateTime
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   createdAt_lte: DateTime
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   createdAt_gt: DateTime
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   createdAt_gte: DateTime
 }
 
@@ -572,16 +812,24 @@ type MessageSubscriptionPayload {
 }
 
 input MessageSubscriptionWhereInput {
-  """Logical AND on all given filters."""
+  """
+  Logical AND on all given filters.
+  """
   AND: [MessageSubscriptionWhereInput!]
 
-  """Logical OR on all given filters."""
+  """
+  Logical OR on all given filters.
+  """
   OR: [MessageSubscriptionWhereInput!]
 
-  """Logical NOT on all given filters combined by AND."""
+  """
+  Logical NOT on all given filters combined by AND.
+  """
   NOT: [MessageSubscriptionWhereInput!]
 
-  """The subscription event gets dispatched when it's listed in mutation_in"""
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
   mutation_in: [MutationType!]
 
   """
@@ -649,115 +897,187 @@ input MessageUpsertWithWhereUniqueWithoutChatInput {
 }
 
 input MessageWhereInput {
-  """Logical AND on all given filters."""
+  """
+  Logical AND on all given filters.
+  """
   AND: [MessageWhereInput!]
 
-  """Logical OR on all given filters."""
+  """
+  Logical OR on all given filters.
+  """
   OR: [MessageWhereInput!]
 
-  """Logical NOT on all given filters combined by AND."""
+  """
+  Logical NOT on all given filters combined by AND.
+  """
   NOT: [MessageWhereInput!]
   id: ID
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   id_not: ID
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   id_in: [ID!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   id_not_in: [ID!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   id_lt: ID
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   id_lte: ID
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   id_gt: ID
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   id_gte: ID
 
-  """All values containing the given string."""
+  """
+  All values containing the given string.
+  """
   id_contains: ID
 
-  """All values not containing the given string."""
+  """
+  All values not containing the given string.
+  """
   id_not_contains: ID
 
-  """All values starting with the given string."""
+  """
+  All values starting with the given string.
+  """
   id_starts_with: ID
 
-  """All values not starting with the given string."""
+  """
+  All values not starting with the given string.
+  """
   id_not_starts_with: ID
 
-  """All values ending with the given string."""
+  """
+  All values ending with the given string.
+  """
   id_ends_with: ID
 
-  """All values not ending with the given string."""
+  """
+  All values not ending with the given string.
+  """
   id_not_ends_with: ID
   message: String
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   message_not: String
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   message_in: [String!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   message_not_in: [String!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   message_lt: String
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   message_lte: String
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   message_gt: String
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   message_gte: String
 
-  """All values containing the given string."""
+  """
+  All values containing the given string.
+  """
   message_contains: String
 
-  """All values not containing the given string."""
+  """
+  All values not containing the given string.
+  """
   message_not_contains: String
 
-  """All values starting with the given string."""
+  """
+  All values starting with the given string.
+  """
   message_starts_with: String
 
-  """All values not starting with the given string."""
+  """
+  All values not starting with the given string.
+  """
   message_not_starts_with: String
 
-  """All values ending with the given string."""
+  """
+  All values ending with the given string.
+  """
   message_ends_with: String
 
-  """All values not ending with the given string."""
+  """
+  All values not ending with the given string.
+  """
   message_not_ends_with: String
   createdAt: DateTime
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   createdAt_not: DateTime
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   createdAt_in: [DateTime!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   createdAt_not_in: [DateTime!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   createdAt_lt: DateTime
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   createdAt_lte: DateTime
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   createdAt_gt: DateTime
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   createdAt_gte: DateTime
   chat: ChatWhereInput
   user: UserWhereInput
@@ -772,17 +1092,41 @@ type Mutation {
   createMessage(data: MessageCreateInput!): Message!
   createUser(data: UserCreateInput!): User!
   updateChat(data: ChatUpdateInput!, where: ChatWhereUniqueInput!): Chat
-  updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
+  updateMessage(
+    data: MessageUpdateInput!
+    where: MessageWhereUniqueInput!
+  ): Message
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   deleteChat(where: ChatWhereUniqueInput!): Chat
   deleteMessage(where: MessageWhereUniqueInput!): Message
   deleteUser(where: UserWhereUniqueInput!): User
-  upsertChat(where: ChatWhereUniqueInput!, create: ChatCreateInput!, update: ChatUpdateInput!): Chat!
-  upsertMessage(where: MessageWhereUniqueInput!, create: MessageCreateInput!, update: MessageUpdateInput!): Message!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  updateManyChats(data: ChatUpdateManyMutationInput!, where: ChatWhereInput): BatchPayload!
-  updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertChat(
+    where: ChatWhereUniqueInput!
+    create: ChatCreateInput!
+    update: ChatUpdateInput!
+  ): Chat!
+  upsertMessage(
+    where: MessageWhereUniqueInput!
+    create: MessageCreateInput!
+    update: MessageUpdateInput!
+  ): Message!
+  upsertUser(
+    where: UserWhereUniqueInput!
+    create: UserCreateInput!
+    update: UserUpdateInput!
+  ): User!
+  updateManyChats(
+    data: ChatUpdateManyMutationInput!
+    where: ChatWhereInput
+  ): BatchPayload!
+  updateManyMessages(
+    data: MessageUpdateManyMutationInput!
+    where: MessageWhereInput
+  ): BatchPayload!
+  updateManyUsers(
+    data: UserUpdateManyMutationInput!
+    where: UserWhereInput
+  ): BatchPayload!
   deleteManyChats(where: ChatWhereInput): BatchPayload!
   deleteManyMessages(where: MessageWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
@@ -795,24 +1139,38 @@ enum MutationType {
   DELETED
 }
 
-"""An object with an ID"""
+"""
+An object with an ID
+"""
 interface Node {
-  """The id of the object."""
+  """
+  The id of the object.
+  """
   id: ID!
 }
 
-"""Information about pagination in a connection."""
+"""
+Information about pagination in a connection.
+"""
 type PageInfo {
-  """When paginating forwards, are there more items?"""
+  """
+  When paginating forwards, are there more items?
+  """
   hasNextPage: Boolean!
 
-  """When paginating backwards, are there more items?"""
+  """
+  When paginating backwards, are there more items?
+  """
   hasPreviousPage: Boolean!
 
-  """When paginating backwards, the cursor to continue."""
+  """
+  When paginating backwards, the cursor to continue.
+  """
   startCursor: String
 
-  """When paginating forwards, the cursor to continue."""
+  """
+  When paginating forwards, the cursor to continue.
+  """
   endCursor: String
 }
 
@@ -821,19 +1179,71 @@ enum PrismaDatabase {
 }
 
 type Query {
-  chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat]!
-  messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message]!
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  chats(
+    where: ChatWhereInput
+    orderBy: ChatOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Chat]!
+  messages(
+    where: MessageWhereInput
+    orderBy: MessageOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Message]!
+  users(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [User]!
   chat(where: ChatWhereUniqueInput!): Chat
   message(where: MessageWhereUniqueInput!): Message
   user(where: UserWhereUniqueInput!): User
-  chatsConnection(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChatConnection!
-  messagesConnection(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MessageConnection!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  chatsConnection(
+    where: ChatWhereInput
+    orderBy: ChatOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): ChatConnection!
+  messagesConnection(
+    where: MessageWhereInput
+    orderBy: MessageOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): MessageConnection!
+  usersConnection(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): UserConnection!
 
-  """Fetches an object given its ID"""
+  """
+  Fetches an object given its ID
+  """
   node(
-    """The ID of an object"""
+    """
+    The ID of an object
+    """
     id: ID!
   ): Node
 }
@@ -848,15 +1258,29 @@ type User implements Node {
   id: ID!
   email: String!
   password: String!
-  chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat!]
+  chats(
+    where: ChatWhereInput
+    orderBy: ChatOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Chat!]
 }
 
-"""A connection to a list of items."""
+"""
+A connection to a list of items.
+"""
 type UserConnection {
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """A list of edges."""
+  """
+  A list of edges.
+  """
   edges: [UserEdge]!
   aggregate: AggregateUser!
 }
@@ -884,12 +1308,18 @@ input UserCreateWithoutChatsInput {
   password: String!
 }
 
-"""An edge in a connection."""
+"""
+An edge in a connection.
+"""
 type UserEdge {
-  """The item at the end of the edge."""
+  """
+  The item at the end of the edge.
+  """
   node: User!
 
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: String!
 }
 
@@ -909,133 +1339,217 @@ type UserPreviousValues {
 }
 
 input UserScalarWhereInput {
-  """Logical AND on all given filters."""
+  """
+  Logical AND on all given filters.
+  """
   AND: [UserScalarWhereInput!]
 
-  """Logical OR on all given filters."""
+  """
+  Logical OR on all given filters.
+  """
   OR: [UserScalarWhereInput!]
 
-  """Logical NOT on all given filters combined by AND."""
+  """
+  Logical NOT on all given filters combined by AND.
+  """
   NOT: [UserScalarWhereInput!]
   id: ID
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   id_not: ID
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   id_in: [ID!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   id_not_in: [ID!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   id_lt: ID
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   id_lte: ID
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   id_gt: ID
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   id_gte: ID
 
-  """All values containing the given string."""
+  """
+  All values containing the given string.
+  """
   id_contains: ID
 
-  """All values not containing the given string."""
+  """
+  All values not containing the given string.
+  """
   id_not_contains: ID
 
-  """All values starting with the given string."""
+  """
+  All values starting with the given string.
+  """
   id_starts_with: ID
 
-  """All values not starting with the given string."""
+  """
+  All values not starting with the given string.
+  """
   id_not_starts_with: ID
 
-  """All values ending with the given string."""
+  """
+  All values ending with the given string.
+  """
   id_ends_with: ID
 
-  """All values not ending with the given string."""
+  """
+  All values not ending with the given string.
+  """
   id_not_ends_with: ID
   email: String
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   email_not: String
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   email_in: [String!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   email_not_in: [String!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   email_lt: String
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   email_lte: String
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   email_gt: String
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   email_gte: String
 
-  """All values containing the given string."""
+  """
+  All values containing the given string.
+  """
   email_contains: String
 
-  """All values not containing the given string."""
+  """
+  All values not containing the given string.
+  """
   email_not_contains: String
 
-  """All values starting with the given string."""
+  """
+  All values starting with the given string.
+  """
   email_starts_with: String
 
-  """All values not starting with the given string."""
+  """
+  All values not starting with the given string.
+  """
   email_not_starts_with: String
 
-  """All values ending with the given string."""
+  """
+  All values ending with the given string.
+  """
   email_ends_with: String
 
-  """All values not ending with the given string."""
+  """
+  All values not ending with the given string.
+  """
   email_not_ends_with: String
   password: String
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   password_not: String
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   password_in: [String!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   password_not_in: [String!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   password_lt: String
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   password_lte: String
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   password_gt: String
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   password_gte: String
 
-  """All values containing the given string."""
+  """
+  All values containing the given string.
+  """
   password_contains: String
 
-  """All values not containing the given string."""
+  """
+  All values not containing the given string.
+  """
   password_not_contains: String
 
-  """All values starting with the given string."""
+  """
+  All values starting with the given string.
+  """
   password_starts_with: String
 
-  """All values not starting with the given string."""
+  """
+  All values not starting with the given string.
+  """
   password_not_starts_with: String
 
-  """All values ending with the given string."""
+  """
+  All values ending with the given string.
+  """
   password_ends_with: String
 
-  """All values not ending with the given string."""
+  """
+  All values not ending with the given string.
+  """
   password_not_ends_with: String
 }
 
@@ -1047,16 +1561,24 @@ type UserSubscriptionPayload {
 }
 
 input UserSubscriptionWhereInput {
-  """Logical AND on all given filters."""
+  """
+  Logical AND on all given filters.
+  """
   AND: [UserSubscriptionWhereInput!]
 
-  """Logical OR on all given filters."""
+  """
+  Logical OR on all given filters.
+  """
   OR: [UserSubscriptionWhereInput!]
 
-  """Logical NOT on all given filters combined by AND."""
+  """
+  Logical NOT on all given filters combined by AND.
+  """
   NOT: [UserSubscriptionWhereInput!]
 
-  """The subscription event gets dispatched when it's listed in mutation_in"""
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
   mutation_in: [MutationType!]
 
   """
@@ -1146,133 +1668,217 @@ input UserUpsertWithWhereUniqueWithoutChatsInput {
 }
 
 input UserWhereInput {
-  """Logical AND on all given filters."""
+  """
+  Logical AND on all given filters.
+  """
   AND: [UserWhereInput!]
 
-  """Logical OR on all given filters."""
+  """
+  Logical OR on all given filters.
+  """
   OR: [UserWhereInput!]
 
-  """Logical NOT on all given filters combined by AND."""
+  """
+  Logical NOT on all given filters combined by AND.
+  """
   NOT: [UserWhereInput!]
   id: ID
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   id_not: ID
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   id_in: [ID!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   id_not_in: [ID!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   id_lt: ID
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   id_lte: ID
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   id_gt: ID
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   id_gte: ID
 
-  """All values containing the given string."""
+  """
+  All values containing the given string.
+  """
   id_contains: ID
 
-  """All values not containing the given string."""
+  """
+  All values not containing the given string.
+  """
   id_not_contains: ID
 
-  """All values starting with the given string."""
+  """
+  All values starting with the given string.
+  """
   id_starts_with: ID
 
-  """All values not starting with the given string."""
+  """
+  All values not starting with the given string.
+  """
   id_not_starts_with: ID
 
-  """All values ending with the given string."""
+  """
+  All values ending with the given string.
+  """
   id_ends_with: ID
 
-  """All values not ending with the given string."""
+  """
+  All values not ending with the given string.
+  """
   id_not_ends_with: ID
   email: String
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   email_not: String
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   email_in: [String!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   email_not_in: [String!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   email_lt: String
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   email_lte: String
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   email_gt: String
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   email_gte: String
 
-  """All values containing the given string."""
+  """
+  All values containing the given string.
+  """
   email_contains: String
 
-  """All values not containing the given string."""
+  """
+  All values not containing the given string.
+  """
   email_not_contains: String
 
-  """All values starting with the given string."""
+  """
+  All values starting with the given string.
+  """
   email_starts_with: String
 
-  """All values not starting with the given string."""
+  """
+  All values not starting with the given string.
+  """
   email_not_starts_with: String
 
-  """All values ending with the given string."""
+  """
+  All values ending with the given string.
+  """
   email_ends_with: String
 
-  """All values not ending with the given string."""
+  """
+  All values not ending with the given string.
+  """
   email_not_ends_with: String
   password: String
 
-  """All values that are not equal to given value."""
+  """
+  All values that are not equal to given value.
+  """
   password_not: String
 
-  """All values that are contained in given list."""
+  """
+  All values that are contained in given list.
+  """
   password_in: [String!]
 
-  """All values that are not contained in given list."""
+  """
+  All values that are not contained in given list.
+  """
   password_not_in: [String!]
 
-  """All values less than the given value."""
+  """
+  All values less than the given value.
+  """
   password_lt: String
 
-  """All values less than or equal the given value."""
+  """
+  All values less than or equal the given value.
+  """
   password_lte: String
 
-  """All values greater than the given value."""
+  """
+  All values greater than the given value.
+  """
   password_gt: String
 
-  """All values greater than or equal the given value."""
+  """
+  All values greater than or equal the given value.
+  """
   password_gte: String
 
-  """All values containing the given string."""
+  """
+  All values containing the given string.
+  """
   password_contains: String
 
-  """All values not containing the given string."""
+  """
+  All values not containing the given string.
+  """
   password_not_contains: String
 
-  """All values starting with the given string."""
+  """
+  All values starting with the given string.
+  """
   password_starts_with: String
 
-  """All values not starting with the given string."""
+  """
+  All values not starting with the given string.
+  """
   password_not_starts_with: String
 
-  """All values ending with the given string."""
+  """
+  All values ending with the given string.
+  """
   password_ends_with: String
 
-  """All values not ending with the given string."""
+  """
+  All values not ending with the given string.
+  """
   password_not_ends_with: String
   chats_every: ChatWhereInput
   chats_some: ChatWhereInput
