@@ -33,25 +33,25 @@ InstaChat is WhatsApp like chat application built with React Native, TypeScript,
 
 ### :point_right: To Run
 
-1) Change the end point in prisma.yml and deploy "InstaChat-Prisma" to Docker.
+##### 1) Change the end point in prisma.yml and deploy "InstaChat-Prisma" to Docker.
 
-docker-compose up -d
+* docker-compose up -d
 
-prisma deploy
+* prisma deploy
 
-2) In "InstaChat-GraphQL-server"
+##### 2) In "InstaChat-GraphQL-server"
 
-Get the prisma type defs using command "graphql get-schema -p prisma"
+* Get the prisma type defs using command "graphql get-schema -p prisma"
 
-Update endpoit in prisma.js (Point to prisma server)
+* Update endpoit in prisma.js (Point to prisma server)
 
-Run Node server using "node start.js"
+* Run Node server using "node start.js"
 
-3) Open "InstaChat-ReactNative-client"
+##### 3) Open "InstaChat-ReactNative-client"
 
-Change httpUri in httpUri.ts (It should point to your node server, if localhost the your computer's IP address)
+* Change httpUri in httpUri.ts (It should point to your node server, if localhost the your computer's IP address)
 
-expo start
+* expo start
 
 ## :point_right: Demo
 
